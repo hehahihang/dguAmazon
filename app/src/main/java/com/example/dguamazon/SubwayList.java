@@ -24,7 +24,7 @@ public class SubwayList extends Activity implements View.OnClickListener {
         setContentView(R.layout.subwaylist);
         ListView listView = (ListView) findViewById(R.id.subwayListView);
 
-        String [] stn = {"가가가가","아아아","신정네거리","까치산", "신도림","문래","강남","사당","홍대","을지로4가","영등포구청","서초","방배","교대","건대입구"};
+        String [] stn = {"신정네거리","까치산", "신도림","문래","강남","사당","홍대","을지로4가","영등포구청","서초","방배","교대","건대입구"};
 
         data = new ArrayList<>();
         for(int i=0;i<stn.length;i++){
