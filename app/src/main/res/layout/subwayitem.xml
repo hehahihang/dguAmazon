@@ -1,26 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+<!--        역이름/서브 역이름 수직-->
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/station"
+            <TextView
+                android:id="@+id/stationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:text="2호선 역이름"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/subStation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:text="2호선 역 서브네임"
+                android:textColor="#69b9ab"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+<!--        출발/도착 버튼 -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2호선"
-            android:textSize="15dp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingRight="20dp">
 
-    </LinearLayout>
-
-
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_from"
+                android:text="From"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_to"
+                android:text="To"/>
+        </LinearLayout>
 
 </LinearLayout>

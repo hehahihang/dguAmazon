@@ -1,14 +1,12 @@
 package com.example.dguamazon;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import com.example.dguamazon.R;
-import com.example.dguamazon.SubwayItem;
 
 import java.util.ArrayList;
 
@@ -29,8 +27,8 @@ public class SubwayAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return data.get(position);
+    public String getItem(int position) {
+        return data.get(position).getName();
     }
 
     @Override
@@ -45,8 +43,11 @@ public class SubwayAdapter extends BaseAdapter {
         }
         SubwayItem subwayItem = data.get(position);
 
-        TextView stationName = (TextView) convertView.findViewById(R.id.station);
-        stationName.setText(subwayItem.getStation());
+        TextView stationName = (TextView) convertView.findViewById(R.id.stationName);
+        stationName.setText(subwayItem.getName());
+
+        TextView subStation = (TextView) convertView.findViewById(R.id.subStation);
+        subStation.setText(subwayItem.getSubName());
 
         return convertView;
     }

@@ -4,7 +4,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/from"
+            android:text="출발지 버튼 누르면 listener받음"
+            android:background="@color/colorWhite"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/to"
+            android:text="도착지 버튼 누르면 listener 받음"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
     <ListView
         android:id="@+id/subwayListView"
         android:layout_width="match_parent"

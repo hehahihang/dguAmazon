@@ -12,37 +12,43 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SubwayList extends AppCompatActivity implements View.OnClickListener {
+
     private ArrayList<SubwayItem> data = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subwaylist);
+
         ListView listView = (ListView) findViewById(R.id.subwayListView);
 
-        Resources resources = new Resources();
-        String [] stn = resources.station;
         data = new ArrayList<>();
-        for(int i=0;i<stn.length;i++){
-            SubwayItem subwayItem = new SubwayItem(stn[i]);
-            data.add(subwayItem);
+
+        Resources res = new Resources();
+        String [] name = res.name;
+        String [] subName = res.subName;
+
+        for(int i = 0; i <name.length; i++){
+            data.add(new SubwayItem(name[i], subName[i]));
         }
 
-        SubwayAdapter adapter = new SubwayAdapter(getApplicationContext(), R.layout.subwayitem, data);
+        SubwayAdapter adapter = new SubwayAdapter(this, R.layout.subwayitem, data);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+
                 Intent intent = new Intent(getApplicationContext(), SubwayClicked.class);
-                intent.putExtra("stationName",data.get(position).getStation());
+                intent.putExtra("name", data.get(position).getName());
+                intent.putExtra("subName", data.get(position).getSubName());
                 startActivity(intent);
             }
         });
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
     }
 }
