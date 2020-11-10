@@ -21,6 +21,8 @@ public class SubwayList extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.subwaylist);
 
         ListView listView = (ListView) findViewById(R.id.subwayListView);
+//        Button btn_from = findViewById(R.id.btn_from);
+//        Button btn_to = findViewById(R.id.btn_to);
 
         data = new ArrayList<>();
 
@@ -43,7 +45,14 @@ public class SubwayList extends AppCompatActivity implements View.OnClickListene
                 intent.putExtra("name", data.get(position).getName());
                 intent.putExtra("subName", data.get(position).getSubName());
                 startActivity(intent);
+
+//                TextView from = (TextView) findViewById(R.id.from);
+//                TextView to = (TextView) findViewById(R.id.to);
+//
+//                from.setText(data.get(position).getName());
+//                to.setText(data.get(position).getSubName());
             }
+
         });
     }
 

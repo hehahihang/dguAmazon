@@ -27,8 +27,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/duration"
@@ -37,23 +37,57 @@
             android:layout_marginRight="15dp"
             android:textSize="20dp"/>
         <TextView
-            android:text="여기가 소요시간"
+            android:text="소요시간"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:layout_weight="1"
             android:layout_marginRight="15dp"
             android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:id="@+id/dateNow"
+            android:text="현재시간"/>
     </LinearLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:tabSelectedTextColor="@color/colorPrimary">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="역별 추천" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="통신사 추천"/>
+    </com.google.android.material.tabs.TabLayout>
+<!--    <ListView-->
+<!--        android:id="@+id/subwayListView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:choiceMode="singleChoice"-->
+<!--        android:dividerHeight="1.5dp"-->
+<!--        android:fastScrollEnabled="true"></ListView>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="15dp"
+        android:orientation="horizontal"
         android:background="@color/colorPrimary">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="여기에 추천 목록"
+            android:text="역별 추천 목록(Expandable ListView)"
             android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
