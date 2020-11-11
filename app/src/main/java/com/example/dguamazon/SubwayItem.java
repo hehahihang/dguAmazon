@@ -1,14 +1,21 @@
 package com.example.dguamazon;
 
 public class SubwayItem {
-    String station;
 
-    public SubwayItem(String station) {
-        this.station = station;
+    private String name;
+    private String subName;
+
+    public String getName() {
+        return name;
     }
 
-    public String getStation(){
-        return station;
+
+    public String getSubName() {
+        return subName;
     }
 
+    public SubwayItem(String name, String subName) {
+        this.name = name;
+        this.subName = subName;
+    }
 }
