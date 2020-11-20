@@ -24,6 +24,4 @@ class Resources {
             "Hongik Univ.", "Sinchon", "Ewha Womans Univ.", "Ahyeon", "Chungjeongno"};
 
 
-    public static int[] cilckedStationImage = {R.drawable.metro,R.drawable.metro,R.drawable.metro,R.drawable.metro,R.drawable.metro,R.drawable.metro,R.drawable.metro};
-
 }
