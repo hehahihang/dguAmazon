@@ -9,16 +9,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
-
-
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SubwayList extends AppCompatActivity{
-    String [] text = {"DEPART","ARRIVE","St. Info"};
+    String [] text = {"DEPART","ARRIVE"};
     TextView from;
     TextView to;
     boolean fromFlag = false;
@@ -72,7 +69,7 @@ public class SubwayList extends AppCompatActivity{
             toFlag = false;
             to.setText("Destination");
             from.setText("Depature");
-            Intent pass = new Intent(getApplicationContext(),MainActivity.class);
+            Intent pass = new Intent(getApplicationContext(), SubwayClicked.class);
             pass.putExtra("fromName",fromName);
             pass.putExtra("toName",toName);
             startActivity(pass);
@@ -103,14 +100,14 @@ public class SubwayList extends AppCompatActivity{
                         to.setText(stationName);
                         onResume();
                         break;
-
-                    case 2:
-                        Toast.makeText(SubwayList.this,"St. info : "+stationName,Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), SubwayClicked.class);
-                        intent.putExtra("name",stationName);
-                        intent.putExtra("subName",subName);
-                        startActivity(intent);
-                        break;
+//
+//                    case 2:
+//                        Toast.makeText(SubwayList.this,"St. info : "+stationName,Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), SubwayClicked.class);
+//                        intent.putExtra("name",stationName);
+//                        intent.putExtra("subName",subName);
+//                        startActivity(intent);
+//                        break;
                 }
                 dialog.dismiss();
             }

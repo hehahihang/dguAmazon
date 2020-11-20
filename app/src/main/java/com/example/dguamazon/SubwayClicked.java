@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,9 +14,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -26,8 +33,10 @@ import androidx.fragment.app.Fragment;
 public class SubwayClicked extends AppCompatActivity {
     TextView weather;
     TextView temperature;
+    TextView day;
 
     private long now = System.currentTimeMillis();
+    private List<Data> subwayData = new ArrayList<>();
 
     Date date = new Date(now);
     SimpleDateFormat formatNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -57,10 +66,14 @@ public class SubwayClicked extends AppCompatActivity {
         dateNow.setText(formatDate);
 
         TextView name = (TextView) findViewById(R.id.clickedStation);
-        name.setText(""+intent.getStringExtra("name"));
+        name.setText(""+intent.getStringExtra("fromName"));
 
         TextView name2 = (TextView) findViewById(R.id.clickedStation2);
-        name2.setText(""+intent.getStringExtra("name"));
+        name2.setText(""+intent.getStringExtra("toName"));
+
+        readSubwayData();
+
+
 //        fragment 실행을 위한 부분
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
@@ -90,7 +103,6 @@ public class SubwayClicked extends AppCompatActivity {
 
             }
 
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 
@@ -104,6 +116,7 @@ public class SubwayClicked extends AppCompatActivity {
 
         weather = (TextView) findViewById(R.id.weather1);
         temperature = (TextView) findViewById(R.id.temperature);
+        day = (TextView) findViewById(R.id.day);
 
 
         //날씨 크롤링을 위해 새로운 스래드 실행
@@ -116,15 +129,20 @@ public class SubwayClicked extends AppCompatActivity {
                     Document doc = Jsoup.connect(weatherURL).get();
                     Elements elements = doc.select(".weather_area .summary  .weather");
                     Elements elements1 = doc.select(".weather_area .current");
+                    Elements elements2 = doc.select(".button .day");
+                    String [] tmp2 = elements2.text().split(" ");
                     String [] tmp = elements1.text().split("도");
                     String str = elements.text();
 
                     String weatherText = str;//날씨
                     String tempText = tmp[1].substring(0,2); //온도
+                    String dayText = tmp2[0]; //요일
 
                     Bundle bundle = new Bundle();
                     bundle.putString("weatherText",weatherText);
                     bundle.putString("tempText",tempText);
+                    bundle.putString("dayText",dayText);
+
                     Message message = handler.obtainMessage();
                     message.setData(bundle);
                     handler.sendMessage(message);
@@ -144,11 +162,37 @@ public class SubwayClicked extends AppCompatActivity {
             Bundle bundle = msg.getData();
             String weatherText = bundle.getString("weatherText");
             String tempText = bundle.getString("tempText");
+            String dayText = bundle.getString("dayText");
             weather.setText(weatherText+" ");
             temperature.setText(tempText+"C");
+            day.setText(" "+dayText);
         }
     };
 
+    public void readSubwayData(){
+        InputStream is =  getResources().openRawResource(R.raw.data);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+        String line = "";
 
+        try{
+            while((line = reader.readLine())!=null){
+                String [] tokens = line.split(",");
+                Data data = new Data();
+                data.setStation(tokens[0]);
+                data.setDays(tokens[1]);
+                data.setWeather(tokens[2]);
+                data.setHours(tokens[3]);
+                data.setSsid(tokens[4]);
+                data.setScore(tokens[5]);
+                subwayData.add(data);
+                Log.d("Data Input","Just created " + data.getStation() + " " + data.getScore());
+            }
+        }
+        catch (IOException e){
+            Log.wtf("SubwayClicked Activity","Reading Data Error"+line, e);
+            e.printStackTrace();
+        }
+    }
 }
-

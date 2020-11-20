@@ -24,4 +24,7 @@ class Resources {
             "Hongik Univ.", "Sinchon", "Ewha Womans Univ.", "Ahyeon", "Chungjeongno"};
 
 
+
+
+
 }
