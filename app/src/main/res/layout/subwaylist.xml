@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/from"
-            android:text="출발지 버튼 누르면 listener받음"
-            android:background="@color/colorWhite"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/to"
-            android:text="도착지 버튼 누르면 listener 받음"
-            android:background="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/from"
+                android:text="Depature"
+                android:textSize="15dp"
+                android:background="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/to"
+                android:text="Destination"
+                android:textSize="15dp"
+                android:background="@color/colorPrimary"/>
     </LinearLayout>
+
     <ListView
         android:id="@+id/subwayListView"
         android:layout_width="match_parent"
@@ -30,6 +37,7 @@
         android:layout_weight="1"
         android:choiceMode="singleChoice"
         android:dividerHeight="1.5dp"
-        android:fastScrollEnabled="true"></ListView>
+        android:fastScrollEnabled="true">
+    </ListView>
 
 </LinearLayout>

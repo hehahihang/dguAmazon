@@ -1,22 +1,31 @@
 package com.example.dguamazon;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class SubwayAdapter extends BaseAdapter {
+public class SubwayAdapter extends BaseAdapter  {
+
+    private Context context;
     private LayoutInflater inflater;
     private ArrayList<SubwayItem> data;
-    private int layout;
-
+    private int layout;//생성자로부터 전달된 아이디
     public SubwayAdapter(Context context, int layout, ArrayList<SubwayItem> data) {
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.context = context;
         this.data = data;
         this.layout = layout;
     }
@@ -37,36 +46,21 @@ public class SubwayAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
+    public View getView(int position, View convertView, final ViewGroup parent) {
+        final int pos = position;
+        final Context context = parent.getContext();
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(layout, parent, false);
         }
-        SubwayItem subwayItem = data.get(position);
 
-        TextView stationName = (TextView) convertView.findViewById(R.id.stationName);
+        //DataSet에서 position에 해당하는 데이터르 참조하여 stationName을 설정한다.
+        final SubwayItem subwayItem = data.get(position);
+        final TextView stationName = (TextView) convertView.findViewById(R.id.stationName);
         stationName.setText(subwayItem.getName());
 
-        TextView subStation = (TextView) convertView.findViewById(R.id.subStation);
-        subStation.setText(subwayItem.getSubName());
-
-//        Button btn_from = (Button) convertView.findViewById(R.id.btn_from);
-//        Button btn_to = (Button) convertView.findViewById(R.id.btn_to);
-
-//        final String text = subwayItem.getName();
-//
-//        btn_from.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//        btn_to.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         return convertView;
     }
+
 }

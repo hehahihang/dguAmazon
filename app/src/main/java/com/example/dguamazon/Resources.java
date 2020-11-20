@@ -23,5 +23,4 @@ class Resources {
             "Sindorim", "Mullae", "Yeongdeungpo-gu Office", "Dangsan", "Hapjeong",
             "Hongik Univ.", "Sinchon", "Ewha Womans Univ.", "Ahyeon", "Chungjeongno"};
 
-
 }

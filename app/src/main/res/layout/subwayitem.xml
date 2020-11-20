@@ -9,51 +9,27 @@
 
 <!--        역이름/서브 역이름 수직-->
         <LinearLayout
-            android:layout_width="250dp"
+            android:id="@+id/body"
+            android:layout_width="match_parent"
             android:layout_height="80dp"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
-            android:orientation="vertical">
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:background="?attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/stationName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center"
                 android:text="2호선 역이름"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/subStation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:text="2호선 역 서브네임"
-                android:textColor="#69b9ab"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:focusable="false"/>
 
         </LinearLayout>
-
-<!--        출발/도착 버튼-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:paddingRight="20dp">-->
-
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/btn_from"-->
-<!--                android:text="From"/>-->
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/btn_to"-->
-<!--                android:text="To"/>-->
-<!--        </LinearLayout>-->
 
 </LinearLayout>
