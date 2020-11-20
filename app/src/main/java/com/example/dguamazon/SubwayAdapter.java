@@ -49,24 +49,7 @@ public class SubwayAdapter extends BaseAdapter {
         TextView subStation = (TextView) convertView.findViewById(R.id.subStation);
         subStation.setText(subwayItem.getSubName());
 
-//        Button btn_from = (Button) convertView.findViewById(R.id.btn_from);
-//        Button btn_to = (Button) convertView.findViewById(R.id.btn_to);
 
-//        final String text = subwayItem.getName();
-//
-//        btn_from.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//        btn_to.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
         return convertView;
     }
 }
