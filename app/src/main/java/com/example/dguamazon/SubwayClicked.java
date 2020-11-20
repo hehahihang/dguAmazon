@@ -57,10 +57,10 @@ public class SubwayClicked extends AppCompatActivity {
         dateNow.setText(formatDate);
 
         TextView name = (TextView) findViewById(R.id.clickedStation);
-        name.setText(""+intent.getStringExtra("name"));
+        name.setText(""+intent.getStringExtra("fromName"));
 
         TextView name2 = (TextView) findViewById(R.id.clickedStation2);
-        name2.setText(""+intent.getStringExtra("name"));
+        name2.setText(""+intent.getStringExtra("toName"));
 //        fragment 실행을 위한 부분
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
@@ -69,6 +69,7 @@ public class SubwayClicked extends AppCompatActivity {
 //      fragment로 데이터 전달 --> intent로 출발/도착역 받게 되면 도착역도 fragment로 넘기자
         Bundle bundle = new Bundle();
         bundle.putString("from", name.getText().toString());
+        bundle.putString("to", name2.getText().toString());
         fragment1.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
