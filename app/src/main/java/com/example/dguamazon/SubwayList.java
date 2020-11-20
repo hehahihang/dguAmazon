@@ -57,7 +57,9 @@ public class SubwayList extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
+
                 getMyDialog(position);
+
             }
         });
     }
