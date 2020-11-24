@@ -33,7 +33,7 @@ public class SubwayClicked extends AppCompatActivity {
     SimpleDateFormat formatNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     String formatDate = formatNow.format(date);
     TextView dateNow;
-
+    private Resources res = new Resources();
     TabLayout tabs;
 
     Fragment1 fragment1;
@@ -61,6 +61,8 @@ public class SubwayClicked extends AppCompatActivity {
 
         TextView name2 = (TextView) findViewById(R.id.clickedStation2);
         name2.setText(""+intent.getStringExtra("toName"));
+
+
 //        fragment 실행을 위한 부분
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
