@@ -28,7 +28,7 @@
                 android:text="출발역"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"/>
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -49,23 +49,51 @@
             android:layout_height="60dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-            <TextView
-                android:layout_width="wrap_content"
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="현재시간"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_weight="4"-->
+<!--                    android:id="@+id/dateNow"-->
+<!--                    android:text="현재시간"/>-->
+<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/dateNow"
-                android:text="현재시간"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/totalTime"
-                android:text="소요시간" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:text="소요시간" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="4"
+                    android:id="@+id/totalTime"
+                    android:text="소요시간" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -89,6 +117,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="온도"/>
+
+            <TextView
+                android:id="@+id/day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="요일"/>
 
         </LinearLayout>
     </LinearLayout>

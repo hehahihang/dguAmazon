@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 public class Fragment1 extends Fragment {
     Resources res = new Resources();
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
-    private ArrayList<String> rootStation = null;
+    protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
     private ArrayList<String> mChildListContent = null;
 
@@ -49,20 +49,40 @@ public class Fragment1 extends Fragment {
         System.out.println(from);
 
 //      도착역 받기만 하면돼! 호호!!
-      String to= getArguments().getString("to");
-      System.out.println(to);
+        String to = getArguments().getString("to");
+        System.out.println(to);
 
+//      양방향
+        if (totalStation.indexOf(from) < totalStation.indexOf(to)) {
+            int rootDist = totalStation.indexOf(to) - totalStation.indexOf(from);
+            if (rootDist <= 21) {
+                for (int i = totalStation.indexOf(from); i <= totalStation.indexOf(to); i++)
+                    rootStation.add(res.name[i]);
+            } else {
+                for (int i = totalStation.indexOf(from); i >= 0; i--)
+                    rootStation.add(res.name[i]);
+                for (int i = totalStation.size() - 1; i >= totalStation.indexOf(to); i--)
+                    rootStation.add(res.name[i]);
+            }
+        } else if (totalStation.indexOf(from) > totalStation.indexOf(to)) {
+            int rootDist = totalStation.indexOf(from) - totalStation.indexOf(to);
+            if (rootDist <= 21) {
+                for (int i = totalStation.indexOf(from); i >= totalStation.indexOf(to); i--)
+                    rootStation.add(res.name[i]);
+            } else {
+                for (int i = totalStation.indexOf(from); i <= totalStation.size() - 1; i++)
+                    rootStation.add(res.name[i]);
+                for (int i = 0; i <= totalStation.indexOf(to); i++)
+                    rootStation.add(res.name[i]);
 
-//      스타트 역 받아서 그 역부터 리스트 출력성공 ㅜ
-        for(int i= totalStation.indexOf(from); i<= totalStation.indexOf(to); i++){
-            rootStation.add(res.name[i]);
+            }
         }
 
         mChildListContent.add("1");
         mChildListContent.add("2");
         mChildListContent.add("3");
 
-        for(int i=0;i<=rootStation.size(); i++){
+        for (int i = 0; i <= rootStation.size(); i++) {
             mChildList.add(mChildListContent);
         }
 
@@ -73,25 +93,29 @@ public class Fragment1 extends Fragment {
 //        listView.setAdapter(listViewAdapter);
 //        elv.setAdapter(new SavedTabsListAdapter());
 
-          elv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-              @Override public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                  Toast.makeText(getActivity().getApplicationContext(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
-              return false;
-              }
-          });
+        elv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Toast.makeText(getActivity().getApplicationContext(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Toast.makeText(getActivity().getApplicationContext(), "c click = " + childPosition, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         elv.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override public void onGroupCollapse(int groupPosition) {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
                 Toast.makeText(getActivity().getApplicationContext(), "g Collapse = " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
         elv.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override public void onGroupExpand(int groupPosition) {
+            @Override
+            public void onGroupExpand(int groupPosition) {
                 Toast.makeText(getActivity().getApplicationContext(), "g Expand = " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
@@ -100,99 +124,5 @@ public class Fragment1 extends Fragment {
 
     }
 
-//    public class SavedTabsListAdapter extends BaseExpandableListAdapter {
-//
-//        private String[] groups = rootStation.toArray(new String[] {});
-//        private String[] child = { "Arnold", "Barry", "Chuck", "David" };
-//        private String[][] children = {{ "Arnold", "Barry", "Chuck", "David" },{ "Arnold", "Barry", "Chuck", "David" },{ "Arnold", "Barry", "Chuck", "David" },{ "Arnold", "Barry", "Chuck", "David" },{ "Arnold", "Barry", "Chuck", "David" }};
-//
-//        @Override
-//        public int getGroupCount() {
-//            return groups.length;
-//        }
-//
-//        @Override
-//        public int getChildrenCount(int i) {
-//            return children[i].length;
-//        }
-//
-//        @Override
-//        public Object getGroup(int i) {
-//            return groups[i];
-//        }
-//
-//        @Override
-//        public Object getChild(int i, int i1) {
-//            return children[i][i1];
-//        }
-//
-//        @Override
-//        public long getGroupId(int i) {
-//            return i;
-//        }
-//
-//        @Override
-//        public long getChildId(int i, int i1) {
-//            return i1;
-//        }
-//
-//        @Override
-//        public boolean hasStableIds() {
-//            return true;
-//        }
-//
-//        @Override
-//        public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-//            TextView textView = new TextView(Fragment1.this.getActivity());
-//            textView.setText(getGroup(i).toString());
-//            return textView;
-//        }
-//
-//        @Override
-//        public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-//            TextView textView = new TextView(Fragment1.this.getActivity());
-//            textView.setText(getChild(i, i1).toString());
-//            return textView;
-//        }
-//
-//        @Override
-//        public boolean isChildSelectable(int i, int i1) {
-//            return true;
-//        }
-//
-//    }
 
 }
-
-//public class Fragment1 extends ListFragment {
-//
-//    Resources res = new Resources();
-//     ArrayList<String> rootStation = null;
-//
-//    @SuppressLint("WrongConstant")
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        super.onActivityCreated(savedInstanceState);
-//
-//
-//        rootStation = new ArrayList<>();
-//        int fromIndex = 0;
-//        for (int i = 0; i < res.name.length; i++) {
-//            rootStation.add(res.name[i]);
-//        }
-//        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, rootStation));
-//
-//        String name = getArguments().getString("name");
-//
-//    }
-//
-//    @SuppressLint("WrongConstant")
-//    @Override
-//    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//
-//        String toast = rootStation.get(position);
-//        Toast.makeText(getActivity(), toast, 0).show();
-//    }
-//}

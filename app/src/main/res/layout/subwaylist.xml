@@ -12,6 +12,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/from"
@@ -22,6 +24,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/to"

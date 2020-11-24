@@ -1,20 +1,12 @@
 package com.example.dguamazon;
 
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -55,12 +47,11 @@ public class SubwayAdapter extends BaseAdapter  {
             convertView = inflater.inflate(layout, parent, false);
         }
 
-        //DataSet에서 position에 해당하는 데이터르 참조하여 stationName을 설정한다.
+        //DataSet에서 position에 해당하는 데이터를 참조하여 stationName을 설정한다.
         final SubwayItem subwayItem = data.get(position);
         final TextView stationName = (TextView) convertView.findViewById(R.id.stationName);
         stationName.setText(subwayItem.getName());
 
         return convertView;
     }
-
 }
