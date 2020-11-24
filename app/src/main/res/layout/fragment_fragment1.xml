@@ -13,14 +13,17 @@
 <!--        android:id="@+id/textView"-->
 <!--        android:textSize="40sp"/>-->
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/wifiList"
-        android:layout_gravity="center_horizontal|bottom"/>
-
-<!--    <ExpandableListView-->
+<!--    <ListView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/list"/>-->
+<!--        android:id="@+id/wifiList"-->
+<!--        android:layout_gravity="center_horizontal|bottom"/>-->
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list"
+        android:groupIndicator="@null"
+        android:layout_gravity="center_horizontal|bottom"/>
+
 </FrameLayout>

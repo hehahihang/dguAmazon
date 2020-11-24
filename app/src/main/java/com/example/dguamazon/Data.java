@@ -1,14 +1,13 @@
 package com.example.dguamazon;
 
 public class Data {
-    String station;
-    String days;
-    String weather;
-
-
-    String hours;
-    String ssid;
-    String score;
+    public int id;
+    public String station;
+    public String days;
+    public String weather;
+    public String hours;
+    public String ssid;
+    public double score;
 
     public String getStation() {
         return station;
@@ -42,19 +41,31 @@ public class Data {
         this.ssid = ssid;
     }
 
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
     public String getHours() {
         return hours;
     }
 
     public void setHours(String hours) {
         this.hours = hours;
+    }
+
+    public double getScore() {
+        return score;
+    }
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id=" + id +
+                ", station='" + station + '\'' +
+                ", days='" + days + '\'' +
+                ", weather='" + weather + '\'' +
+                ", hours=" + hours +
+                ", ssid='" + ssid + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

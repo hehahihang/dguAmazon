@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +23,8 @@ public class SubwayList extends AppCompatActivity{
     boolean toFlag = false;
     String fromName;
     String toName;
+    int fromCode;
+    int toCode;
 
     private ArrayList<SubwayItem> data = null;
 
@@ -29,6 +32,7 @@ public class SubwayList extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subwaylist);
+
 
         from = (TextView) findViewById(R.id.from);
         to = (TextView) findViewById(R.id.to);
@@ -39,13 +43,12 @@ public class SubwayList extends AppCompatActivity{
         Resources res = new Resources();
         String [] name = res.name;
         String [] subName = res.subName;
+        Integer [] code = res.stationCode;
 
         for(int i = 0; i <name.length; i++){
-            SubwayItem item = new SubwayItem(name[i],subName[i]);
+            SubwayItem item = new SubwayItem(name[i],subName[i],code[i]);
             data.add(item);
         }
-
-        
 
         SubwayAdapter adapter = new SubwayAdapter(this, R.layout.subwayitem, data);
         listView.setAdapter(adapter);
@@ -54,9 +57,7 @@ public class SubwayList extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-
                 getMyDialog(position);
-
             }
         });
     }
@@ -72,6 +73,8 @@ public class SubwayList extends AppCompatActivity{
             Intent pass = new Intent(getApplicationContext(), SubwayClicked.class);
             pass.putExtra("fromName",fromName);
             pass.putExtra("toName",toName);
+            pass.putExtra("fromCode", fromCode);
+            pass.putExtra("toCode",toCode);
             startActivity(pass);
         }
     }
@@ -79,6 +82,8 @@ public class SubwayList extends AppCompatActivity{
     public void getMyDialog(final int position){
         final String stationName = data.get(position).getName();
         final String subName = data.get(position).getSubName();
+        final int stCode = data.get(position).getCode();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(SubwayList.this);
         builder.setTitle("Select Option");
         builder.setItems(text, new DialogInterface.OnClickListener() {
@@ -89,6 +94,7 @@ public class SubwayList extends AppCompatActivity{
                         Toast.makeText(SubwayList.this,"DEPART : "+stationName,Toast.LENGTH_SHORT).show();
                         fromFlag = true;
                         fromName = stationName;
+                        fromCode = stCode;
                         from.setText(stationName);
                         onResume();
                         break;
@@ -97,17 +103,11 @@ public class SubwayList extends AppCompatActivity{
                         Toast.makeText(SubwayList.this,"ARRIVE : "+stationName,Toast.LENGTH_SHORT).show();
                         toFlag = true;
                         toName = stationName;
+                        toCode = stCode;
                         to.setText(stationName);
                         onResume();
                         break;
-//
-//                    case 2:
-//                        Toast.makeText(SubwayList.this,"St. info : "+stationName,Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(getApplicationContext(), SubwayClicked.class);
-//                        intent.putExtra("name",stationName);
-//                        intent.putExtra("subName",subName);
-//                        startActivity(intent);
-//                        break;
+
                 }
                 dialog.dismiss();
             }
