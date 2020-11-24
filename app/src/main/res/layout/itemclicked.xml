@@ -26,10 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="출발역"
-                android:ellipsize="marquee"
-                android:singleLine="true"
                 android:textSize="20dp"
                 android:textStyle="bold"
+                android:autoSizeTextType="uniform"
                 android:layout_marginRight="20dp"/>
             <TextView
                 android:text="도착역"
@@ -37,8 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ellipsize="marquee"
-                android:singleLine="true"
+                android:autoSizeTextType="uniform"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
