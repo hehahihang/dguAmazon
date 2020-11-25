@@ -11,12 +11,19 @@
         <LinearLayout
             android:id="@+id/body"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="50dp"
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:layout_weight="2"
             android:orientation="horizontal"
             android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/line2"
+                android:background="#00ff0000"/>
 
             <TextView
                 android:id="@+id/stationName"

@@ -18,44 +18,99 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
-            <TextView
-                android:id="@+id/clickedStation"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="출발역"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:autoSizeTextType="uniform"
-                android:layout_marginRight="20dp"/>
-            <TextView
-                android:text="도착역"
-                android:id="@+id/clickedStation2"
+                android:orientation="vertical"
+                android:background="@drawable/customborder">
+
+                <TextView
+                    android:id="@+id/clickedStation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="출발역"
+                    android:textStyle="bold"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:textSize="20dp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:autoSizeTextType="uniform"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:background="@drawable/customborder">
+
+                <TextView
+                    android:id="@+id/clickedStation2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="도착역"
+                    android:textStyle="bold"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit ="marquee_forever"
+                    android:textSize="20dp"
+                    android:gravity="center"/>
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
 
-            <TextView
-                android:layout_width="wrap_content"
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="현재시간"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_weight="4"-->
+<!--                    android:id="@+id/dateNow"-->
+<!--                    android:text="현재시간"/>-->
+<!--            </LinearLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/dateNow"
-                android:text="현재시간"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="4"
+                    android:id="@+id/totalTime"
+                    android:text="소요시간" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -63,11 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-           <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="City Weather : "></TextView>
 
             <TextView
                 android:id="@+id/weather1"
@@ -88,6 +138,7 @@
                 android:text="요일"/>
 
         </LinearLayout>
+
     </LinearLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -105,7 +156,6 @@
         android:layout_below="@id/tabs"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
     </FrameLayout>
 
 

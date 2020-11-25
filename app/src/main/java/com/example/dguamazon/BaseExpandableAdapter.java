@@ -57,9 +57,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
         }else{
             viewHolder = (ViewHolder)v.getTag();
         }
-
-        viewHolder.tv_groupName.setText(getGroup(groupPosition));
-
+        viewHolder.tv_groupName.setText(getGroup(groupPosition)+"       >>");
         return v;
     }
 

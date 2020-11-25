@@ -1,11 +1,9 @@
 package com.example.dguamazon;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,8 +12,8 @@ import com.google.android.material.tabs.TabLayout;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import java.io.IOException;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,24 +26,26 @@ import androidx.fragment.app.Fragment;
 
 
 public class SubwayClicked extends AppCompatActivity {
-    DataAdapter mDbHelper; //데이터베이스 불러오기위한 DBHelper
-
+    //데이터베이스 불러오기위한 DBHelper;
+    DataAdapter mDbHelper;
 
     //현재 날씨, 기온, 날짜를 출력하는 Textview
     TextView weather;
     TextView temperature;
     TextView day;
 
-    private long now = System.currentTimeMillis();
+    //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
     List<Data> subwayData = new ArrayList<>();
-    SubwaySendList subwaySendList;
 
+    //현재 시간(HH)을 받아오기 위해 사용한 currentTimeMills, Date 클래스, SDF
+    private long now = System.currentTimeMillis();
     Date date = new Date(now);
     SimpleDateFormat formatHour = new SimpleDateFormat("HH");
     String Hours = formatHour.format(date);
 
-
+    //프래그먼트 전환을 위한 탭
     TabLayout tabs;
+
     //Framgment 1,2
     Fragment1 fragment1;
     Fragment2 fragment2;
@@ -57,6 +57,8 @@ public class SubwayClicked extends AppCompatActivity {
     //출발지 도착치 코드
     int fromCode;
     int toCode;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,14 +74,30 @@ public class SubwayClicked extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-
         TextView name = (TextView) findViewById(R.id.clickedStation);
         fromName = intent.getStringExtra("fromName");
         name.setText("" + fromName);
+        name.setSelected(true);
 
         TextView name2 = (TextView) findViewById(R.id.clickedStation2);
         toName = intent.getStringExtra("toName");
         name2.setText("" + toName);
+        name2.setSelected(true);
+
+
+//        totalTime = rootStation.size()-1;
+//
+////      역 이동 하나당 126초씩
+//        totalTime = 126 * totalTime;
+//
+////      분, 초 나눔
+//        int minute = (int)(totalTime / 60);
+//        int second = (int) (60 * ((totalTime / 60) - minute));
+//        String time1 = minute+"분 "+second+"초";
+//
+//
+//        TextView time = (TextView) findViewById(R.id.totalTime);
+//        time.setText(time1);
 
         fromCode = intent.getIntExtra("fromCode",-1);
         toCode = intent.getIntExtra("toCode",-1);
@@ -92,14 +110,15 @@ public class SubwayClicked extends AppCompatActivity {
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
 
-//      fragment로 데이터 전달 --> intent로 출발/도착역 받게 되면 도착역도 fragment로 넘기자
         final Bundle bundle = new Bundle();
+//      fragment로 데이터 전달 --> intent로 출발/도착역 받게 되면 도착역도 fragment로 넘기자
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
 
         fragment1.setArguments(bundle);
-
         getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+
+
 
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("와이파이 추천"));
@@ -115,7 +134,6 @@ public class SubwayClicked extends AppCompatActivity {
                 else if (position == 1)
                     selected = fragment2;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
-
             }
 
             @Override
@@ -154,28 +172,49 @@ public class SubwayClicked extends AppCompatActivity {
                     if(str.equals("구름조금"))
                         str = "맑음";
 
+                    switch (str){
+                        case "맑음":
+                            str = "Sunny";
+                            break;
+                        case "흐림":
+                            str = "Cloudy";
+                            break;
+                        case "눈":
+                            str = "Snowy";
+                            break;
+                        case "비":
+                            str = "Rainy";
+                            break;
+
+                            default:
+                                str = "Sunny";
+                                break;
+                    }
+                    //날씨를 Bundle 객체로 보내기 위해 String 타입변수로 저장
                     String weatherText = str;//날씨
                     String tempText = tmp[1].substring(0, 2); //온도
                     String dayText = tmp2[0]; //요일
 
-
-                    //어댑터를 통해 지금 context로 DB를 불러온다.
+                    //어댑터를 통해 현재의 context로 DB를 불러온다.
                     mDbHelper = new DataAdapter(getApplicationContext());
                     mDbHelper.createDatabase();
                     mDbHelper.open();
 
-                    //넘어온 객체들이 저장되어있는 데이터 리스트형식
+                    //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
                     subwayData = mDbHelper.getTableData(fromCode, toCode, weatherText, dayText, Hours);
-                    Bundle bundle1 = new Bundle();
+                    SubwaySendList subwaySendList = new SubwaySendList();
+                    subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
+                    //넘어온 객체들이 저장되어있는 데이터 리스트형식
                     int size = subwayData.size();
                     System.out.println("총 와이파이 개수 : " + size);
                     System.out.println("출발역 : " + fromName + "도착역 : " + toName);
 
                     for(int i=0;i<size;i++){
                         Data data = subwayData.get(i);
-                        System.out.println("정보 :  "+ data.getStation() +" "+ data.getSsid()+" "+data.getScore());
+                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
                     }
+
 
                     Bundle bundle = new Bundle();
                     bundle.putString("weatherText", weatherText);
@@ -191,6 +230,7 @@ public class SubwayClicked extends AppCompatActivity {
             }
         }.start();
     }
+
     //핸들러로 뿌려준다.
     Handler handler = new Handler() {
         @Override
