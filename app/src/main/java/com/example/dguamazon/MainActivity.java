@@ -9,7 +9,6 @@ import java.util.List;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class MainActivity extends AppCompatActivity {
     public List<Data> subwayList;
     DataAdapter mDbHelper;

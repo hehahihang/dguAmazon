@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,8 @@ public class Fragment1 extends Fragment {
     private ArrayList<ArrayList<String>> mChildList = null;
     private ArrayList<String> mChildListContent = null;
 
-
+    SubwaySendList subwaySendList = null;
+    Bundle bundle;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,11 +48,15 @@ public class Fragment1 extends Fragment {
 
 //        출발역 데이터 넘겼다리ㅜ
         String from = getArguments().getString("from");
-        System.out.println(from);
+//        System.out.println(from);
 
 //      도착역 받기만 하면돼! 호호!!
         String to = getArguments().getString("to");
-        System.out.println(to);
+//        System.out.println(to);
+
+//      경로 내 subwaydata 넘기기
+        ArrayList subwayData = getArguments().getParcelableArrayList("subwayData");
+        System.out.println(subwayData.size());
 
 //      양방향
         if (totalStation.indexOf(from) < totalStation.indexOf(to)) {
@@ -64,6 +70,7 @@ public class Fragment1 extends Fragment {
                 for (int i = totalStation.size() - 1; i >= totalStation.indexOf(to); i--)
                     rootStation.add(res.name[i]);
             }
+
         } else if (totalStation.indexOf(from) > totalStation.indexOf(to)) {
             int rootDist = totalStation.indexOf(from) - totalStation.indexOf(to);
             if (rootDist <= 21) {
@@ -74,17 +81,63 @@ public class Fragment1 extends Fragment {
                     rootStation.add(res.name[i]);
                 for (int i = 0; i <= totalStation.indexOf(to); i++)
                     rootStation.add(res.name[i]);
-
             }
         }
 
-        mChildListContent.add("1");
-        mChildListContent.add("2");
-        mChildListContent.add("3");
+        Comparator<Data> scoreComparator = new Comparator<Data>(){
 
-        for (int i = 0; i <= rootStation.size(); i++) {
+            @Override
+            public int compare(Data t1, Data t2) {
+                double delta = t2.getScore() - t1.getScore();
+                if(delta > 0 ) return 1;
+                if(delta < 0) return -1;
+                return 0;
+            }
+        };
+
+        for(int i = 0; i< rootStation.size(); i++){
+            mChildListContent.clear();
+            ArrayList<Data> oneSubway = new ArrayList<>();
+
+            System.out.println("역 이름 : " + rootStation.get(i));
+
+            for(int j = 0; j < subwayData.size(); j++){
+                Data data = (Data) subwayData.get(j);
+                if(data.getStation().equals(rootStation.get(i)))
+                    oneSubway.add(data);
+            }
+            Collections.sort(oneSubway, scoreComparator);
+
+            if(oneSubway.size() >= 3){
+                for(int k = 0; k<3; k++){
+                    Data data = oneSubway.get(k);
+                    mChildListContent.add(data.getSsid());
+//                System.out.println(data.getStation()+" / "+data.getScore());
+                }
+            }
+            else if(oneSubway.size() < 3 && oneSubway.size() != 0){
+                for(int k = 0; k<oneSubway.size(); k++){
+                    Data data = oneSubway.get(k);
+                    mChildListContent.add(data.getSsid());
+                }
+            }
+            else{
+                mChildListContent.add("No WiFi");
+            }
+
+            System.out.println(mChildListContent);
             mChildList.add(mChildListContent);
         }
+        System.out.println(mChildList.size());
+
+
+//        mChildListContent.add("1st. SK_WiFi");
+//        mChildListContent.add("2nd. KT_Free_WiFi");
+//        mChildListContent.add("3rd. Free_U_WiFi");
+//
+//        for (int i = 0; i <= rootStation.size(); i++) {
+//            mChildList.add(mChildListContent);
+//        }
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -96,33 +149,25 @@ public class Fragment1 extends Fragment {
         elv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Toast.makeText(getActivity().getApplicationContext(), "g click = " + groupPosition, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         elv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(getActivity().getApplicationContext(), "c click = " + childPosition, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
         elv.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(), "g Collapse = " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
         elv.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity().getApplicationContext(), "g Expand = " + groupPosition, Toast.LENGTH_SHORT).show();
             }
         });
-
         return rootView;
-
     }
-
-
 }

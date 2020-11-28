@@ -14,10 +14,10 @@ public class DataAdapter  {
     protected static final String TAG = "DataAdapter";
     protected static final String TABLE_NAME = "subway";
 
-
     private final Context mContext;
     private SQLiteDatabase mDb;
     private DataBaseHelper mDbHelper;
+
 
     public DataAdapter(Context context){
         this.mContext = context;
@@ -52,17 +52,33 @@ public class DataAdapter  {
         mDbHelper.close();
     }
 
-    public List getTableData(String fromName, String toName, String weatherText, String dayText, String Hours){
-        try{
-            //데이터를 넘길수는 있는데 어디 부터 어디 까지를 넘긴다는게 station이 일정하게 정렬되어있는게 아니라 어려움
-            //station이름 말고 서브쿼리 사용해서 해당 스테이션 이름에 해당하는
-            //id값을 불러와서 구간을 정하고 그 구간에 해당하는 데이터를 모두 가져와야 하나..
+    public List getTableData(int fromCode, int toCode, String weatherText, String dayText, String Hours){
 
-            String sql = "SELECT * FROM " + TABLE_NAME + " WHERE (station = ? OR station = ?) AND weather = ? AND days = ? AND hours = ?";
-            String [] args = {fromName, toName, weatherText, dayText, Hours};
-            List subwayList = new ArrayList();
+        try{
+            String sql = "";
+            String [] args;
+
+            //조건에 따라 출력하는 SQL쿼리
+            String sql1 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)" ;
+            String [] args1 = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
+
+            String sql2 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)";
+            String [] args2 = {Integer.toString(toCode), Integer.toString(fromCode), weatherText, dayText, Hours};
+
+            if(fromCode<toCode){
+                sql = sql1;
+                args = args1;
+            }
+            else{
+                sql = sql2;
+                args = args2;
+            }
+
+
+            List<Data> subwayList = new ArrayList();
             Data data = null;
             Cursor mCur = mDb.rawQuery(sql,args);
+
             if(mCur!=null){
                 while(mCur.moveToNext()){
                     data = new Data();
@@ -72,11 +88,13 @@ public class DataAdapter  {
                     data.setHours(mCur.getString(3));
                     data.setSsid(mCur.getString(4));
                     data.setScore(Double.parseDouble(mCur.getString(5)));
+                    data.setCode(Integer.parseInt(mCur.getString(6)));
 
                     subwayList.add(data);
                 }
             }
-            return subwayList;
+            return subwayList; //여기서 리턴했는데 이걸 담아서 보내주면 되나
+
         }
         catch (SQLException mSQLException){
             Log.e(TAG,"getTestData >> "+mSQLException.toString());

@@ -17,9 +17,11 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/from"
-                android:text="Depature"
-                android:textSize="15dp"
-                android:background="@color/colorPrimary"/>
+                android:text="From"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:background="@drawable/customborder"
+                android:layout_margin="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -29,10 +31,13 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/to"
-                android:text="Destination"
-                android:textSize="15dp"
-                android:background="@color/colorPrimary"/>
+                android:text="To"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:background="@drawable/customborder"
+                android:layout_margin="5dp"/>
     </LinearLayout>
+
 
     <ListView
         android:id="@+id/subwayListView"

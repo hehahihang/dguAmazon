@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,7 +17,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -27,39 +27,37 @@ import androidx.fragment.app.Fragment;
 
 
 public class SubwayClicked extends AppCompatActivity {
-    DataAdapter mDbHelper; //데이터베이스 불러오기위한 DBHelper
+    //데이터베이스 불러오기위한 DBHelper;
+    DataAdapter mDbHelper;
 
+    //현재 날씨, 기온, 날짜를 출력하는 Textview
     TextView weather;
     TextView temperature;
     TextView day;
 
+    //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
+    List<Data> subwayData = new ArrayList<>();
+
+    //현재 시간(HH)을 받아오기 위해 사용한 currentTimeMills, Date 클래스, SDF
     private long now = System.currentTimeMillis();
-    private List<Data> subwayData = new ArrayList<>();
-
-
     Date date = new Date(now);
-    SimpleDateFormat formatNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    String formatDate = formatNow.format(date);
-
     SimpleDateFormat formatHour = new SimpleDateFormat("HH");
     String Hours = formatHour.format(date);
 
-    TextView dateNow;
-    private Resources res = new Resources();
-
-    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
-    private ArrayList<String> rootStation = null;
-
+    //프래그먼트 전환을 위한 탭
     TabLayout tabs;
 
+    //Framgment 1,2
     Fragment1 fragment1;
     Fragment2 fragment2;
 
+    //출발지 도착지 이름
     String fromName;
     String toName;
+
+    //출발지 도착치 코드
     int fromCode;
     int toCode;
-    double totalTime = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,16 +73,15 @@ public class SubwayClicked extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-//        dateNow = (TextView) findViewById(R.id.dateNow);
-//        dateNow.setText(formatDate);
-
         TextView name = (TextView) findViewById(R.id.clickedStation);
         fromName = intent.getStringExtra("fromName");
         name.setText("" + fromName);
+        name.setSelected(true);
 
         TextView name2 = (TextView) findViewById(R.id.clickedStation2);
         toName = intent.getStringExtra("toName");
         name2.setText("" + toName);
+        name2.setSelected(true);
 
 
 //        totalTime = rootStation.size()-1;
@@ -112,18 +109,18 @@ public class SubwayClicked extends AppCompatActivity {
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
 
-
+        final Bundle bundle = new Bundle();
 //      fragment로 데이터 전달 --> intent로 출발/도착역 받게 되면 도착역도 fragment로 넘기자
-        Bundle bundle = new Bundle();
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
-        fragment1.setArguments(bundle);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+//
+//        fragment1.setArguments(bundle);
+//        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("와이파이 추천"));
-        tabs.addTab(tabs.newTab().setText("통신사 추천"));
+        tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
+        tabs.addTab(tabs.newTab().setText("Operator Recommend"));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -135,7 +132,6 @@ public class SubwayClicked extends AppCompatActivity {
                 else if (position == 1)
                     selected = fragment2;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
-
             }
 
             @Override
@@ -169,23 +165,59 @@ public class SubwayClicked extends AppCompatActivity {
                     String[] tmp2 = elements2.text().split(" ");
                     String[] tmp = elements1.text().split("도");
                     String str = elements.text();
+                    if(str.equals("구름많음"))
+                        str = "흐림";
+                    if(str.equals("구름조금"))
+                        str = "맑음";
 
+                    switch (str){
+                        case "맑음":
+                            str = "Sunny";
+                            break;
+                        case "흐림":
+                            str = "Cloudy";
+                            break;
+                        case "눈":
+                            str = "Snowy";
+                            break;
+                        case "비":
+                            str = "Rainy";
+                            break;
+
+                            default:
+                                str = "Sunny";
+                                break;
+                    }
+                    //날씨를 Bundle 객체로 보내기 위해 String 타입변수로 저장
                     String weatherText = str;//날씨
                     String tempText = tmp[1].substring(0, 2); //온도
                     String dayText = tmp2[0]; //요일
 
-
-                    //어댑터를 통해 지금 context로 DB를 불러온다.
+                    //어댑터를 통해 현재의 context로 DB를 불러온다.
                     mDbHelper = new DataAdapter(getApplicationContext());
                     mDbHelper.createDatabase();
                     mDbHelper.open();
 
-                    subwayData = mDbHelper.getTableData(fromName, toName, weatherText, dayText, Hours);
-                    int size = subwayData.size();
+                    //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
+                    subwayData = mDbHelper.getTableData(fromCode, toCode, weatherText, dayText, Hours);
+                    SubwaySendList subwaySendList = new SubwaySendList();
+                    subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
-                    System.out.println("출발역 개수 : " + size);
-                    System.out.println(fromName + " " + toName);
-                    System.out.println(Hours+"  : 시간대");
+                    //넘어온 객체들이 저장되어있는 데이터 리스트형식
+
+                    //어레이 리스트를 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
+                    bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
+                    fragment1.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+
+                    int size = subwayData.size();
+                    System.out.println("총 와이파이 개수 : " + size);
+                    System.out.println("출발역 : " + fromName + "도착역 : " + toName);
+
+//                    for(int i=0;i<size;i++){
+//                        Data data = subwayData.get(i);
+//                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
+//                    }
 
 
                     Bundle bundle = new Bundle();
@@ -217,29 +249,3 @@ public class SubwayClicked extends AppCompatActivity {
         }
     };
 }
-//    public void readSubwayData(){
-//        InputStream is =  getResources().openRawResource(R.raw.data);
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(is, Charset.forName("UTF-8"))
-//        );
-//        String line = "";
-//
-//        try{
-//            while((line = reader.readLine())!=null){
-//                String [] tokens = line.split(",");
-//                Data data = new Data();
-//                data.setStation(tokens[0]);
-//                data.setDays(tokens[1]);
-//                data.setWeather(tokens[2]);
-//                data.setHours(Integer.parseInt(tokens[3]));
-//                data.setSsid(tokens[4]);
-//                data.setScore(Double.parseDouble(tokens[5]));
-//                subwayData.add(data);
-//                Log.d("Data Input","Just created " + data.getStation() + " " + data.getScore());
-//            }
-//        }
-//        catch (IOException e){
-//            Log.wtf("SubwayClicked Activity","Reading Data Error"+line, e);
-//            e.printStackTrace();
-//        }
-//    }
