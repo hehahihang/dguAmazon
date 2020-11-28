@@ -31,15 +31,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
     // 그룹 사이즈를 반환한다.
     @Override
-    public int getGroupCount() {
-        return rootStation.size();
-    }
+    public int getGroupCount() { return rootStation.size(); }
 
     // 그룹 ID를 반환한다.
     @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
+    public long getGroupId(int groupPosition) { return groupPosition; }
 
     // 그룹뷰 각각의 ROW
     @Override
@@ -64,8 +60,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     // 차일드뷰를 반환한다.
     @Override
     public String getChild(int groupPosition, int childPosition) {
-        return childList.get(groupPosition).get(childPosition);
-    }
+        return childList.get(groupPosition).get(childPosition); }
 
     // 차일드뷰 사이즈를 반환한다.
     @Override
@@ -75,9 +70,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
     // 차일드뷰 ID를 반환한다.
     @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
+    public long getChildId(int groupPosition, int childPosition) { return childPosition; }
 
     // 차일드뷰 각각의 ROW
     @Override

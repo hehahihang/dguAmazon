@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -57,8 +58,6 @@ public class SubwayClicked extends AppCompatActivity {
     //출발지 도착치 코드
     int fromCode;
     int toCode;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,14 +114,13 @@ public class SubwayClicked extends AppCompatActivity {
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
 
-        fragment1.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
-
-
+//
+//        fragment1.setArguments(bundle);
+//        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("와이파이 추천"));
-        tabs.addTab(tabs.newTab().setText("통신사 추천"));
+        tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
+        tabs.addTab(tabs.newTab().setText("Operator Recommend"));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -206,14 +204,20 @@ public class SubwayClicked extends AppCompatActivity {
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
                     //넘어온 객체들이 저장되어있는 데이터 리스트형식
+
+                    //어레이 리스트를 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
+                    bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
+                    fragment1.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+
                     int size = subwayData.size();
                     System.out.println("총 와이파이 개수 : " + size);
                     System.out.println("출발역 : " + fromName + "도착역 : " + toName);
 
-                    for(int i=0;i<size;i++){
-                        Data data = subwayData.get(i);
-                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
-                    }
+//                    for(int i=0;i<size;i++){
+//                        Data data = subwayData.get(i);
+//                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
+//                    }
 
 
                     Bundle bundle = new Bundle();

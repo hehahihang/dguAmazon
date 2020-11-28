@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +30,6 @@ public class Fragment1 extends Fragment {
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,11 +48,15 @@ public class Fragment1 extends Fragment {
 
 //        출발역 데이터 넘겼다리ㅜ
         String from = getArguments().getString("from");
-        System.out.println(from);
+//        System.out.println(from);
 
 //      도착역 받기만 하면돼! 호호!!
         String to = getArguments().getString("to");
-        System.out.println(to);
+//        System.out.println(to);
+
+//      경로 내 subwaydata 넘기기
+        ArrayList subwayData = getArguments().getParcelableArrayList("subwayData");
+        System.out.println(subwayData.size());
 
 //      양방향
         if (totalStation.indexOf(from) < totalStation.indexOf(to)) {
@@ -79,14 +84,60 @@ public class Fragment1 extends Fragment {
             }
         }
 
+        Comparator<Data> scoreComparator = new Comparator<Data>(){
 
-        mChildListContent.add("1st. SK_WiFi");
-        mChildListContent.add("2nd. KT_Free_WiFi");
-        mChildListContent.add("3rd. Free_U_WiFi");
+            @Override
+            public int compare(Data t1, Data t2) {
+                double delta = t2.getScore() - t1.getScore();
+                if(delta > 0 ) return 1;
+                if(delta < 0) return -1;
+                return 0;
+            }
+        };
 
-        for (int i = 0; i <= rootStation.size(); i++) {
+        for(int i = 0; i< rootStation.size(); i++){
+            mChildListContent.clear();
+            ArrayList<Data> oneSubway = new ArrayList<>();
+
+            System.out.println("역 이름 : " + rootStation.get(i));
+
+            for(int j = 0; j < subwayData.size(); j++){
+                Data data = (Data) subwayData.get(j);
+                if(data.getStation().equals(rootStation.get(i)))
+                    oneSubway.add(data);
+            }
+            Collections.sort(oneSubway, scoreComparator);
+
+            if(oneSubway.size() >= 3){
+                for(int k = 0; k<3; k++){
+                    Data data = oneSubway.get(k);
+                    mChildListContent.add(data.getSsid());
+//                System.out.println(data.getStation()+" / "+data.getScore());
+                }
+            }
+            else if(oneSubway.size() < 3 && oneSubway.size() != 0){
+                for(int k = 0; k<oneSubway.size(); k++){
+                    Data data = oneSubway.get(k);
+                    mChildListContent.add(data.getSsid());
+                }
+            }
+            else{
+                mChildListContent.add("No WiFi");
+            }
+
+            System.out.println(mChildListContent);
             mChildList.add(mChildListContent);
         }
+        System.out.println(mChildList.size());
+
+
+//        mChildListContent.add("1st. SK_WiFi");
+//        mChildListContent.add("2nd. KT_Free_WiFi");
+//        mChildListContent.add("3rd. Free_U_WiFi");
+//
+//        for (int i = 0; i <= rootStation.size(); i++) {
+//            mChildList.add(mChildListContent);
+//        }
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),

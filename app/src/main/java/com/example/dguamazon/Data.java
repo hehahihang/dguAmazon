@@ -3,7 +3,7 @@ package com.example.dguamazon;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Data implements Parcelable {
+public class Data implements Parcelable{
     public String station;
     public String days;
     public String weather;
@@ -118,4 +118,5 @@ public class Data implements Parcelable {
         }
         dest.writeInt(code);
     }
+
 }
