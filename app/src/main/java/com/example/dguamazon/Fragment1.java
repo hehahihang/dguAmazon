@@ -26,7 +26,9 @@ public class Fragment1 extends Fragment {
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
-    private ArrayList<String> mChildListContent = null;
+    private int uPlus = 0;
+    private int kt = 0;
+    private int sk = 0;
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
@@ -35,7 +37,7 @@ public class Fragment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
-        mChildListContent = new ArrayList();
+
 
 
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
@@ -96,48 +98,41 @@ public class Fragment1 extends Fragment {
         };
 
         for(int i = 0; i< rootStation.size(); i++){
-            mChildListContent.clear();
             ArrayList<Data> oneSubway = new ArrayList<>();
-
+            ArrayList<String> mChildListContent = new ArrayList<>();
             System.out.println("역 이름 : " + rootStation.get(i));
 
+            //그 역 이름이랑 getStation이랑 같은 data들만 모은다.
             for(int j = 0; j < subwayData.size(); j++){
                 Data data = (Data) subwayData.get(j);
-                if(data.getStation().equals(rootStation.get(i)))
+                //rootStation의 i번째 인덱스 역이랑 이름이 같은 data만 oneSubway에 모은다.
+                if(data.getStation().equals(rootStation.get(i))){
                     oneSubway.add(data);
+                }
             }
             Collections.sort(oneSubway, scoreComparator);
 
-            if(oneSubway.size() >= 3){
-                for(int k = 0; k<3; k++){
-                    Data data = oneSubway.get(k);
-                    mChildListContent.add(data.getSsid());
-//                System.out.println(data.getStation()+" / "+data.getScore());
+            if(oneSubway.size() > 3){
+                for(int j = 0; j< 3; j++){
+                    System.out.print(oneSubway.get(j).getSsid()+"/");
+                    mChildListContent.add(oneSubway.get(j).getSsid());
                 }
             }
             else if(oneSubway.size() < 3 && oneSubway.size() != 0){
-                for(int k = 0; k<oneSubway.size(); k++){
-                    Data data = oneSubway.get(k);
-                    mChildListContent.add(data.getSsid());
+                for(int j = 0; j< oneSubway.size(); j++){
+                    System.out.print(oneSubway.get(j).getSsid()+"/");
+                    mChildListContent.add(oneSubway.get(j).getSsid());
                 }
             }
             else{
-                mChildListContent.add("No WiFi");
+                mChildListContent.add("");
             }
 
-            System.out.println(mChildListContent);
+            System.out.println();
             mChildList.add(mChildListContent);
+
         }
-        System.out.println(mChildList.size());
-
-
-//        mChildListContent.add("1st. SK_WiFi");
-//        mChildListContent.add("2nd. KT_Free_WiFi");
-//        mChildListContent.add("3rd. Free_U_WiFi");
-//
-//        for (int i = 0; i <= rootStation.size(); i++) {
-//            mChildList.add(mChildListContent);
-//        }
+        System.out.println("U : "+ uPlus + " KT : "+ kt + " SK : " + sk);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
