@@ -219,7 +219,6 @@ public class SubwayClicked extends AppCompatActivity {
 //                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
 //                    }
 
-
                     Bundle bundle = new Bundle();
                     bundle.putString("weatherText", weatherText);
                     bundle.putString("tempText", tempText);
