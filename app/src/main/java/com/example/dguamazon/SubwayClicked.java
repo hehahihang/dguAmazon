@@ -114,13 +114,11 @@ public class SubwayClicked extends AppCompatActivity {
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
 
-//
-//        fragment1.setArguments(bundle);
-//        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
         tabs.addTab(tabs.newTab().setText("Operator Recommend"));
+
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -205,10 +203,10 @@ public class SubwayClicked extends AppCompatActivity {
 
                     //넘어온 객체들이 저장되어있는 데이터 리스트형식
 
-                    //어레이 리스트를 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
+                    //어레이 리스트를 번들에 넣고 최종적으로 fragment2로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
-                    fragment1.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
+                    fragment2.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment2).commit();
 
                     int size = subwayData.size();
                     System.out.println("총 와이파이 개수 : " + size);
