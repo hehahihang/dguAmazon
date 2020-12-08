@@ -68,8 +68,8 @@ public class SubwayList extends AppCompatActivity{
         if(fromFlag==true && toFlag==true){
             fromFlag = false;
             toFlag = false;
-            to.setText("From");
-            from.setText("To");
+            to.setText("To");
+            from.setText("From");
             Intent pass = new Intent(getApplicationContext(), SubwayClicked.class);
             pass.putExtra("fromName",fromName);
             pass.putExtra("toName",toName);

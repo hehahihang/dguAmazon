@@ -59,6 +59,11 @@ public class SubwayClicked extends AppCompatActivity {
     int fromCode;
     int toCode;
 
+
+//    Resources res = new Resources();
+//    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
+//    protected ArrayList<String> rootStation = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,21 +88,6 @@ public class SubwayClicked extends AppCompatActivity {
         name2.setText("" + toName);
         name2.setSelected(true);
 
-
-//        totalTime = rootStation.size()-1;
-//
-////      역 이동 하나당 126초씩
-//        totalTime = 126 * totalTime;
-//
-////      분, 초 나눔
-//        int minute = (int)(totalTime / 60);
-//        int second = (int) (60 * ((totalTime / 60) - minute));
-//        String time1 = minute+"분 "+second+"초";
-//
-//
-//        TextView time = (TextView) findViewById(R.id.totalTime);
-//        time.setText(time1);
-
         fromCode = intent.getIntExtra("fromCode",-1);
         toCode = intent.getIntExtra("toCode",-1);
 
@@ -114,11 +104,13 @@ public class SubwayClicked extends AppCompatActivity {
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
 
+//
+//        fragment1.setArguments(bundle);
+//        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
         tabs.addTab(tabs.newTab().setText("Operator Recommend"));
-
+        tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -126,9 +118,9 @@ public class SubwayClicked extends AppCompatActivity {
                 int position = tab.getPosition();
                 Fragment selected = null;
                 if (position == 0)
-                    selected = fragment1;
-                else if (position == 1)
                     selected = fragment2;
+                else if (position == 1)
+                    selected = fragment1;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 
@@ -182,9 +174,9 @@ public class SubwayClicked extends AppCompatActivity {
                             str = "Rainy";
                             break;
 
-                            default:
-                                str = "Sunny";
-                                break;
+                        default:
+                            str = "Sunny";
+                            break;
                     }
                     //날씨를 Bundle 객체로 보내기 위해 String 타입변수로 저장
                     String weatherText = str;//날씨
@@ -203,10 +195,10 @@ public class SubwayClicked extends AppCompatActivity {
 
                     //넘어온 객체들이 저장되어있는 데이터 리스트형식
 
-                    //어레이 리스트를 번들에 넣고 최종적으로 fragment2로 subwaydata 넘김
+                    //어레이 리스트를 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
-                    fragment2.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment2).commit();
+                    fragment1.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
                     int size = subwayData.size();
                     System.out.println("총 와이파이 개수 : " + size);
