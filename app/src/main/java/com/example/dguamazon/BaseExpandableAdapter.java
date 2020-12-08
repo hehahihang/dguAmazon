@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,13 +45,25 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
         View v = convertView;
         if(v == null){
             viewHolder = new ViewHolder();
-            v = inflater.inflate(R.layout.list_row, parent, false);
+            v = inflater.inflate(R.layout.list_parent, parent, false);
             viewHolder.tv_groupName = (TextView) v.findViewById(R.id.tv_group);
+            viewHolder.tv_traffic = (ImageView) v.findViewById(R.id.tv_traffic);
             v.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)v.getTag();
         }
-        viewHolder.tv_groupName.setText(getGroup(groupPosition)+"       >>");
+
+        viewHolder.tv_groupName.setText(getGroup(groupPosition));
+
+//      오빠 미안해요 childlist 1등 ssid  값을 parent로 가져오는거 하나하다 못했어요... 랜덤으로 가져왔어요...
+        int rd = (int) (Math.random()*3 + 1);
+
+        if(rd == 1)
+            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
+        else if(rd == 2)
+            viewHolder.tv_traffic.setImageResource(R.drawable.orangecolor);
+        else
+            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
         return v;
     }
 
@@ -98,6 +111,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
     class ViewHolder {
         public TextView tv_groupName;
+        public ImageView tv_traffic;
         public TextView tv_childName;
     }
 

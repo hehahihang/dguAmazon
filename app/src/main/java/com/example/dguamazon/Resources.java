@@ -14,7 +14,7 @@ class Resources {
             "","","","","Holt Children's Services, inc", "","","","","Chugye Univ. for the Arts", "Kyonggi Univ."};
 
     //station name
-    public static String[] name = {"SELECT","City Hall", "Euljiro 1(il)-ga", "Euljiro 3(sam)-ga", "Euljiro 4(sa)-ga",
+    public static String[] name = {"","City Hall", "Euljiro 1(il)-ga", "Euljiro 3(sam)-ga", "Euljiro 4(sa)-ga",
             "Dongdaemun History & Culture Park", "Sindang", "Sangwangsimni",
             "Wangsimni", "Hanyang Univ.", "Ttukseom", "Seongsu", "Konkuk Univ.",
             "Guui", "Gangbyeon", "Jamsillaru", "Jamsil", "Jamsilsaenae", "Sports Complex", "Samseong",
