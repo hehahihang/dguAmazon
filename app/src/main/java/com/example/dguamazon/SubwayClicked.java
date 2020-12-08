@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -112,15 +113,17 @@ public class SubwayClicked extends AppCompatActivity {
         tabs.addTab(tabs.newTab().setText("Operator Recommend"));
         tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
 
+
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Fragment selected = null;
-                if (position == 0)
+                Fragment seleczzted = null;
+                if (position == 0){
                     selected = fragment2;
                 else if (position == 1)
                     selected = fragment1;
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 

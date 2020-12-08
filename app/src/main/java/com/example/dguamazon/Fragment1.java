@@ -37,9 +37,6 @@ public class Fragment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
-
-
-
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
 

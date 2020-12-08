@@ -41,14 +41,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-
         View v = convertView;
-
         if(v == null){
             viewHolder = new ViewHolder();
             v = inflater.inflate(R.layout.list_row, parent, false);
             viewHolder.tv_groupName = (TextView) v.findViewById(R.id.tv_group);
-
             v.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)v.getTag();
