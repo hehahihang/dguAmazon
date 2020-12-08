@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -109,7 +112,7 @@ public class SubwayClicked extends AppCompatActivity {
 //        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
         tabs = findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("Operator Recommend"));
+//        tabs.addTab(tabs.newTab().setText("Operator Recommend"));
         tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -118,9 +121,9 @@ public class SubwayClicked extends AppCompatActivity {
                 int position = tab.getPosition();
                 Fragment selected = null;
                 if (position == 0)
-                    selected = fragment2;
-                else if (position == 1)
                     selected = fragment1;
+//                else if (position == 1)
+//                    selected = fragment1;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 
@@ -132,6 +135,17 @@ public class SubwayClicked extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+
+        Button button = (Button) findViewById(R.id.Setting);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                startActivityForResult(intent,0);
             }
         });
 
