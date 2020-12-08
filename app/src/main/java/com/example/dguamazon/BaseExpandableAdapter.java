@@ -70,9 +70,9 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
             viewHolder.tv_traffic.setImageResource(R.drawable.red);
 
         if(isExpanded){
-            viewHolder.imageView.setImageResource(R.drawable.arrowdown);
+            viewHolder.imageView.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
         } else {
-            viewHolder.imageView.setImageResource(R.drawable.arrowup);
+            viewHolder.imageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
         }
 
         return v;
