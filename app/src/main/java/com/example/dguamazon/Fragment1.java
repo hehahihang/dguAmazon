@@ -1,7 +1,10 @@
 package com.example.dguamazon;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +25,26 @@ import androidx.fragment.app.Fragment;
  * A simple {@link Fragment} subclass.
  */
 public class Fragment1 extends Fragment {
+    private Fragment1Listener listener;
+    public interface Fragment1Listener{
+        void onInputSent(String telecomName);
+    }
+
     Resources res = new Resources();
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
-    private int uPlus = 0;
-    private int kt = 0;
-    private int sk = 0;
+
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        int lgCnt = 0;
+        int ktCnt = 0;
+        int skCnt = 0;
+        int max = 0;
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
@@ -43,15 +53,8 @@ public class Fragment1 extends Fragment {
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
         elv.setAdapter(new BaseExpandableAdapter(getActivity(), rootStation, mChildList));
 
-//        ListView listView = rootView.findViewById(R.id.wifiList);
-
-//        출발역 데이터 넘겼다리ㅜ
         String from = getArguments().getString("from");
-//        System.out.println(from);
-
-//      도착역 받기만 하면돼! 호호!!
         String to = getArguments().getString("to");
-//        System.out.println(to);
 
 //      경로 내 subwaydata 넘기기
         ArrayList subwayData = getArguments().getParcelableArrayList("subwayData");
@@ -111,25 +114,46 @@ public class Fragment1 extends Fragment {
 
             if(oneSubway.size() > 3){
                 for(int j = 0; j< 3; j++){
-                    System.out.print(oneSubway.get(j).getSsid()+"/");
+                    String ssidName = oneSubway.get(j).getSsid();
+                    if(ssidName.equals("SK_WiFi"))
+                        skCnt++;
+                    else if(ssidName.equals("U_WiFi") || ssidName.equals("Free_U_WiFi"))
+                        lgCnt++;
+                    else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
+                        ktCnt++;
                     mChildListContent.add(oneSubway.get(j).getSsid());
                 }
             }
             else if(oneSubway.size() < 3 && oneSubway.size() != 0){
                 for(int j = 0; j< oneSubway.size(); j++){
-                    System.out.print(oneSubway.get(j).getSsid()+"/");
+                    String ssidName = oneSubway.get(j).getSsid();
+                    if(ssidName.equals("SK_WiFi"))
+                        skCnt++;
+                    else if(ssidName.equals("U_WiFi") || ssidName.equals("Free_U_WiFi"))
+                        lgCnt++;
+                    else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
+                        ktCnt++;
                     mChildListContent.add(oneSubway.get(j).getSsid());
                 }
             }
             else{
                 mChildListContent.add("");
             }
+            String telecomName = "";
+            max = Math.max(skCnt,Math.max(ktCnt,lgCnt));
+            if(skCnt==max)
+                telecomName = "SK";
+            else if (ktCnt==max)
+                telecomName = "KT";
+            else if (lgCnt==max)
+                telecomName = "LG";
 
-            System.out.println();
+            System.out.println(skCnt+"개 "+ktCnt+"개 "+lgCnt+"개 ");
+
+            listener.onInputSent(telecomName);
             mChildList.add(mChildListContent);
 
         }
-        System.out.println("U : "+ uPlus + " KT : "+ kt + " SK : " + sk);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -161,5 +185,23 @@ public class Fragment1 extends Fragment {
             }
         });
         return rootView;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Fragment1Listener){
+            listener = (Fragment1Listener) context;
+        }
+        else{
+            throw new RuntimeException(context.toString()
+            +" must implement Framgment1Listener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
 }

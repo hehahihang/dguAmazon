@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,7 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-public class SubwayClicked extends AppCompatActivity {
+public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragment1Listener {
     //데이터베이스 불러오기위한 DBHelper;
     DataAdapter mDbHelper;
 
@@ -36,6 +37,7 @@ public class SubwayClicked extends AppCompatActivity {
     TextView temperature;
     TextView day;
 
+    ImageView imageviewTelecom;
     //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
     List<Data> subwayData = new ArrayList<>();
 
@@ -60,6 +62,8 @@ public class SubwayClicked extends AppCompatActivity {
     int fromCode;
     int toCode;
 
+    String telName;
+
 
 //    Resources res = new Resources();
 //    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
@@ -70,7 +74,7 @@ public class SubwayClicked extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemclicked);
 
-        ListView listView = (ListView) findViewById(R.id.subwayListView);
+//        ListView listView = (ListView) findViewById(R.id.subwayListView);
         //전단계(출발/도착지 고르기)로 돌아가기
 
         ActionBar actionBar = getSupportActionBar();
@@ -89,6 +93,8 @@ public class SubwayClicked extends AppCompatActivity {
         name2.setText("" + toName);
         name2.setSelected(true);
 
+        imageviewTelecom = findViewById(R.id.imageviewTelecom);
+
         fromCode = intent.getIntExtra("fromCode",-1);
         toCode = intent.getIntExtra("toCode",-1);
 
@@ -105,25 +111,19 @@ public class SubwayClicked extends AppCompatActivity {
         bundle.putString("from", name.getText().toString());
         bundle.putString("to", name2.getText().toString());
 
-//
-//        fragment1.setArguments(bundle);
-//        getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
-
         tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("Operator Recommend"));
         tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
-
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                Fragment seleczzted = null;
-                if (position == 0){
+                Fragment selected = null;
+                if (position == 0)
                     selected = fragment2;
                 else if (position == 1)
                     selected = fragment1;
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
 
@@ -141,7 +141,6 @@ public class SubwayClicked extends AppCompatActivity {
         weather = (TextView) findViewById(R.id.weather1);
         temperature = (TextView) findViewById(R.id.temperature);
         day = (TextView) findViewById(R.id.day);
-
 
         //날씨 크롤링을 위해 새로운 쓰래드 실행
         //외부 Thread를 통해 내부적으로 멈추는 것을 방지
@@ -196,21 +195,12 @@ public class SubwayClicked extends AppCompatActivity {
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
-                    //넘어온 객체들이 저장되어있는 데이터 리스트형식
-
-                    //어레이 리스트를 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
+                    //ArrayList 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
                     fragment1.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
                     int size = subwayData.size();
-                    System.out.println("총 와이파이 개수 : " + size);
-                    System.out.println("출발역 : " + fromName + "도착역 : " + toName);
-
-//                    for(int i=0;i<size;i++){
-//                        Data data = subwayData.get(i);
-//                        System.out.println("정보 :  "+ data.getStation() +" / "+ data.getSsid()+" / "+data.getScore());
-//                    }
 
                     Bundle bundle = new Bundle();
                     bundle.putString("weatherText", weatherText);
@@ -240,4 +230,19 @@ public class SubwayClicked extends AppCompatActivity {
             day.setText(" " + dayText);
         }
     };
+
+    @Override
+    public void onInputSent(final String telecomName) {
+        try{
+            if(telecomName.equals("KT"))
+                imageviewTelecom.setImageResource(R.drawable.kt);
+            if(telecomName.equals("LG"))
+                imageviewTelecom.setImageResource(R.drawable.uplus);
+            if(telecomName.equals("SK"))
+                imageviewTelecom.setImageResource(R.drawable.sk);
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+    }
 }
