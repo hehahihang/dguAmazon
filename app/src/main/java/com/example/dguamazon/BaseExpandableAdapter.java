@@ -16,6 +16,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     private ArrayList<ArrayList<String>> childList = null;
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
+    private Data data = new Data();
 
     public BaseExpandableAdapter(Context c, ArrayList<String> rootStation, ArrayList<ArrayList<String>> childList){
         super();
@@ -50,6 +51,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
             v = inflater.inflate(R.layout.list_parent, parent, false);
             viewHolder.tv_groupName = (TextView) v.findViewById(R.id.tv_group);
             viewHolder.tv_traffic = (ImageView) v.findViewById(R.id.tv_traffic);
+            viewHolder.imageView = (ImageView) v.findViewById(R.id.indicator);
             v.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)v.getTag();
@@ -66,6 +68,13 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
             viewHolder.tv_traffic.setImageResource(R.drawable.yellow);
         else
             viewHolder.tv_traffic.setImageResource(R.drawable.red);
+
+        if(isExpanded){
+            viewHolder.imageView.setImageResource(R.drawable.arrowdown);
+        } else {
+            viewHolder.imageView.setImageResource(R.drawable.arrowup);
+        }
+
         return v;
     }
 
@@ -114,6 +123,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     class ViewHolder {
         public TextView tv_groupName;
         public ImageView tv_traffic;
+        public ImageView imageView;
         public TextView tv_childName;
     }
 
