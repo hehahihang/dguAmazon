@@ -6,20 +6,21 @@
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_subway"
         android:label="지하철안내"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_subway_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SubwayList">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity android:name=".MainActivity" android:parentActivityName=".SubwayList"></activity>-->
+        <activity android:name=".SubwayList"></activity>
         <activity android:name=".SubwayClicked" android:parentActivityName=".SubwayList"></activity>
 
     </application>

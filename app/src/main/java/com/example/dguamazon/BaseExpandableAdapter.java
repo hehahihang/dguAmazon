@@ -43,9 +43,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-
         View v = convertView;
-
         if(v == null){
             viewHolder = new ViewHolder();
             v = inflater.inflate(R.layout.list_parent, parent, false);
@@ -59,17 +57,14 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
         viewHolder.tv_groupName.setText(getGroup(groupPosition));
 
-//      오빠 미안해요 childlist 1등 ssid  값을 parent로 가져오는거 하나하다 못했어요... 랜덤으로 가져왔어요...
         int rd = (int) (Math.random()*3 + 1);
 
         if(rd == 1)
-            viewHolder.tv_traffic.setImageResource(R.drawable.green);
-
-
+            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
         else if(rd == 2)
-            viewHolder.tv_traffic.setImageResource(R.drawable.yellow);
+            viewHolder.tv_traffic.setImageResource(R.drawable.orangecolor);
         else
-            viewHolder.tv_traffic.setImageResource(R.drawable.red);
+            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
 
         if(isExpanded){
             viewHolder.imageView.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);

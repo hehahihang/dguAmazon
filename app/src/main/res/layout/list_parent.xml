@@ -15,7 +15,8 @@
         android:layout_marginLeft="10dip"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textSize="15dp" />
+        android:textSize="17dp"
+        android:textStyle="bold"/>
 
 
     <ImageView
