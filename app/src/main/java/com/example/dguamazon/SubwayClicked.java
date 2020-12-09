@@ -39,6 +39,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     TextView weather;
     TextView temperature;
     TextView day;
+    TextView totalTime;
+    TextView WIFIName;
 
     ImageView imageviewTelecom;
     //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
@@ -97,6 +99,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         name2.setSelected(true);
 
         imageviewTelecom = findViewById(R.id.imageviewTelecom);
+        totalTime = findViewById(R.id.totalTime);
+        WIFIName = findViewById(R.id.textviewWIFIName);
 
         fromCode = intent.getIntExtra("fromCode",-1);
         toCode = intent.getIntExtra("toCode",-1);
@@ -129,15 +133,12 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 //                    selected = fragment1;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -246,14 +247,18 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     };
 
     @Override
-    public void onInputSent(final String telecomName) {
+    public void onInputSent(final String telecomName, final int stationSize) {
         try{
-            if(telecomName.equals("KT"))
+            if(telecomName.equals("KT_WiFi"))
                 imageviewTelecom.setImageResource(R.drawable.kt);
-            if(telecomName.equals("LG"))
+            else if(telecomName.equals("U_WiFi"))
                 imageviewTelecom.setImageResource(R.drawable.uplus);
-            if(telecomName.equals("SK"))
+            else if(telecomName.equals("SK_WiFi"))
                 imageviewTelecom.setImageResource(R.drawable.sk);
+
+            WIFIName.setText(telecomName);
+            String time = Integer.toString(stationSize*2);
+            totalTime.setText(time);
         }
         catch (NullPointerException e){
             e.printStackTrace();

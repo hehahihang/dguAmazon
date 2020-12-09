@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment;
 public class Fragment1 extends Fragment {
     private Fragment1Listener listener;
     public interface Fragment1Listener{
-        void onInputSent(String telecomName);
+        void onInputSent(String telecomName, int stationSize);
     }
 
     Resources res = new Resources();
@@ -45,6 +45,8 @@ public class Fragment1 extends Fragment {
         int ktCnt = 0;
         int skCnt = 0;
         int max = 0;
+        int stationSize = 0;
+
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
@@ -110,9 +112,11 @@ public class Fragment1 extends Fragment {
                     oneSubway.add(data);
                 }
             }
-            Collections.sort(oneSubway, scoreComparator);
 
-            if(oneSubway.size() > 3){
+            Collections.sort(oneSubway, scoreComparator);
+            stationSize = oneSubway.size();
+
+            if(stationSize > 3){
                 for(int j = 0; j< 3; j++){
                     String ssidName = oneSubway.get(j).getSsid();
                     if(ssidName.equals("SK_WiFi"))
@@ -124,7 +128,7 @@ public class Fragment1 extends Fragment {
                     mChildListContent.add(oneSubway.get(j).getSsid());
                 }
             }
-            else if(oneSubway.size() < 3 && oneSubway.size() != 0){
+            else if(stationSize < 3 && stationSize != 0){
                 for(int j = 0; j< oneSubway.size(); j++){
                     String ssidName = oneSubway.get(j).getSsid();
                     if(ssidName.equals("SK_WiFi"))
@@ -141,16 +145,17 @@ public class Fragment1 extends Fragment {
             }
             String telecomName = "";
             max = Math.max(skCnt,Math.max(ktCnt,lgCnt));
+
             if(skCnt==max)
-                telecomName = "SK";
+                telecomName = "SK_WiFi";
             else if (ktCnt==max)
-                telecomName = "KT";
+                telecomName = "KT_WiFi";
             else if (lgCnt==max)
-                telecomName = "LG";
+                telecomName = "U_WiFi";
 
             System.out.println(skCnt+"개 "+ktCnt+"개 "+lgCnt+"개 ");
 
-            listener.onInputSent(telecomName);
+            listener.onInputSent(telecomName,stationSize);
             mChildList.add(mChildListContent);
 
         }

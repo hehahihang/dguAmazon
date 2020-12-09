@@ -38,17 +38,17 @@
             android:text="FROM"></TextView>
 
         <Spinner
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:id="@+id/fromSpinner"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/customborder">
         </Spinner>
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -59,10 +59,10 @@
             android:text="TO"></TextView>
 
         <Spinner
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:id="@+id/toSpinner"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/customborder">

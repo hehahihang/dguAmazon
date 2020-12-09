@@ -25,7 +25,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:background="@drawable/customborder">
+                android:background="@drawable/customborder"
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:id="@+id/clickedStation"
@@ -33,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="출발역"
+                    android:textColor="#000000"
                     android:textStyle="bold"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -50,7 +52,8 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_gravity="center"
-                android:background="@drawable/customborder">
+                android:background="@drawable/customborder"
+                android:layout_marginLeft="10dp">
 
                 <TextView
                     android:id="@+id/clickedStation2"
@@ -59,6 +62,7 @@
                     android:layout_weight="1"
                     android:text="도착역"
                     android:textStyle="bold"
+                    android:textColor="#000000"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:singleLine="true"
@@ -82,32 +86,41 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:gravity="center"
                     android:id="@+id/totalTime"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="#000000"
                     android:text="소요시간"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="min"
+                    android:textSize="10dp"
+                    android:textStyle="bold"></TextView>
 
-            <LinearLayout
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/imageviewTelecom"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:id="@+id/imageviewTelecom"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:text="통신사"></ImageView>
+                android:text="통신사"></ImageView>
 
             </LinearLayout>
 
@@ -119,9 +132,13 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/textviewWIFIName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WIFI이름"></TextView>
+                    android:text="WIFI이름"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"></TextView>
 
                 <Button
                     android:id="@+id/Setting"
@@ -146,21 +163,24 @@
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="요일"/>
+                android:text="요일"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/weather1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="날씨 정보"/>
+                android:text="날씨 정보"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="온도"/>
+                android:text="온도"
+                android:textColor="#000000"/>
 
 
         </LinearLayout>
