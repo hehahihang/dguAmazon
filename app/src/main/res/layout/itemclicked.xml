@@ -42,7 +42,7 @@
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit ="marquee_forever"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -69,7 +69,7 @@
                     android:scrollHorizontally="true"
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit ="marquee_forever"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:gravity="center"/>
             </LinearLayout>
 
@@ -96,36 +96,22 @@
                     android:layout_width="wrap_content"
                     android:textColor="#000000"
                     android:text="소요시간"
-                    android:textSize="20dp"
+                    android:textSize="30dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="min"
-                    android:textSize="10dp"
-                    android:textStyle="bold"></TextView>
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"></TextView>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:id="@+id/imageviewTelecom"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:text="통신사"></ImageView>
-
-            </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -134,18 +120,22 @@
                 <TextView
                     android:id="@+id/textviewWIFIName"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:text="WIFI이름"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
-                    android:textColor="#000000"></TextView>
+                    android:textColor="#000000"
+                    android:padding="2dp"
+                    android:gravity="center"></TextView>
 
-                <Button
-                    android:id="@+id/Setting"
+                <ImageView
+                    android:id="@+id/imageviewWIFI"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
-                    android:text="SET" />
+                    android:src="@drawable/ic_wifi_black_24dp"/>
+
+
 
             </LinearLayout>
 
@@ -159,19 +149,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageviewWeather">
+            </ImageView>
+
             <TextView
+                android:layout_marginLeft="5dp"
                 android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="요일"
-                android:textColor="#000000"/>
-
-            <TextView
-                android:id="@+id/weather1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="날씨 정보"
                 android:textColor="#000000"/>
 
             <TextView

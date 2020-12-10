@@ -1,10 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorPrimaryDark">#0759AA</item>
         <item name="colorAccent">#000000</item>
     </style>
 
@@ -13,6 +13,11 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar"> <!--액션바 삭제-->
         <item name="android:windowBackground">@drawable/splash</item>
         <!--위에서 만든 xml 파일 이름.-->
+    </style>
+
+    <style name="ThemeSpinner">
+        <item name="colorAccent">#ffa000</item>
+        <item name="colorControlNormal">#ffc107</item>
     </style>
 
 </resources>

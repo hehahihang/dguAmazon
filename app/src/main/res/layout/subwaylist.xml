@@ -48,7 +48,7 @@
         </Spinner>
 
         <TextView
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

@@ -43,6 +43,9 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     TextView WIFIName;
 
     ImageView imageviewTelecom;
+    ImageView imageviewWeather;
+    ImageView imageviewWIFI;
+
     //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
     List<Data> subwayData = new ArrayList<>();
 
@@ -81,11 +84,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 
 //        ListView listView = (ListView) findViewById(R.id.subwayListView);
         //전단계(출발/도착지 고르기)로 돌아가기
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("지하철 안내");
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         Intent intent = getIntent();
 
         TextView name = (TextView) findViewById(R.id.clickedStation);
@@ -98,7 +96,9 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         name2.setText("" + toName);
         name2.setSelected(true);
 
-        imageviewTelecom = findViewById(R.id.imageviewTelecom);
+        imageviewWIFI = findViewById(R.id.imageviewWIFI);
+        imageviewWeather = findViewById(R.id.imageviewWeather);
+//        imageviewTelecom = findViewById(R.id.imageviewTelecom);
         totalTime = findViewById(R.id.totalTime);
         WIFIName = findViewById(R.id.textviewWIFIName);
 
@@ -142,10 +142,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
         });
 
-
-        Button button = (Button) findViewById(R.id.Setting);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        imageviewWIFI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
@@ -153,7 +150,15 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
         });
 
-        weather = (TextView) findViewById(R.id.weather1);
+        WIFIName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                startActivityForResult(intent,0);
+            }
+        });
+
+//        weather = (TextView) findViewById(R.id.weather1);
         temperature = (TextView) findViewById(R.id.temperature);
         day = (TextView) findViewById(R.id.day);
 
@@ -240,21 +245,35 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             String weatherText = bundle.getString("weatherText"); //현재 날씨
             String tempText = bundle.getString("tempText"); //현재 온도
             String dayText = bundle.getString("dayText"); //현재 날짜
-            weather.setText(weatherText + " ");
+//            weather.setText(weatherText + " ");
             temperature.setText(tempText + "C");
-            day.setText(" " + dayText);
+            day.setText(" " + dayText.toUpperCase());
+
+            switch (weatherText){
+                case "Sunny":
+                    imageviewWeather.setImageResource(R.drawable.ic_brightness_5_black_24dp);
+                    break;
+                case "Cloudy":
+                    imageviewWeather.setImageResource(R.drawable.ic_wb_cloudy_black_24dp);
+                    break;
+                case "Rainy":
+                    imageviewWeather.setImageResource(R.drawable.ic_beach_access_black_24dp);
+                    break;
+                case "Snowy":
+                    imageviewWeather.setImageResource(R.drawable.ic_ac_unit_black_24dp);
+            }
         }
     };
 
     @Override
     public void onInputSent(final String telecomName, final int stationSize) {
         try{
-            if(telecomName.equals("KT_WiFi"))
-                imageviewTelecom.setImageResource(R.drawable.kt);
-            else if(telecomName.equals("U_WiFi"))
-                imageviewTelecom.setImageResource(R.drawable.uplus);
-            else if(telecomName.equals("SK_WiFi"))
-                imageviewTelecom.setImageResource(R.drawable.sk);
+//            if(telecomName.equals("KT_WiFi"))
+//                imageviewTelecom.setImageResource(R.drawable.kt);
+//            else if(telecomName.equals("U_WiFi"))
+//                imageviewTelecom.setImageResource(R.drawable.uplus);
+//            else if(telecomName.equals("SK_WiFi"))
+//                imageviewTelecom.setImageResource(R.drawable.sk);
 
             WIFIName.setText(telecomName);
             String time = Integer.toString(stationSize*2);
@@ -262,6 +281,14 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         }
         catch (NullPointerException e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0){
+            Toast.makeText(this, "와이파이 변경이 완료되었습니다!", Toast.LENGTH_SHORT).show();
         }
     }
 }

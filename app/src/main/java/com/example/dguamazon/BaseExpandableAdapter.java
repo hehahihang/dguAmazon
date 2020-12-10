@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class BaseExpandableAdapter extends BaseExpandableListAdapter {
-
     private ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> childList = null;
     private LayoutInflater inflater = null;
