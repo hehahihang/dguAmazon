@@ -11,23 +11,16 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:src="@drawable/subway"></ImageView>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:text="SUCH A WiFi!"
-            android:textStyle="bold"
-            android:textSize="20dp"></TextView>
+
         
         <TextView
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="110dp"
             android:layout_gravity="left"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
