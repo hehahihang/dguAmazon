@@ -44,6 +44,7 @@ public class Fragment1 extends Fragment {
         int skCnt = 0;
         int max = 0;
         int stationSize = 0;
+        int stationSize2 = 0;
 
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
@@ -65,9 +66,10 @@ public class Fragment1 extends Fragment {
             int rootDist = totalStation.indexOf(to) - totalStation.indexOf(from);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i <= totalStation.indexOf(to); i++)
-                    rootStation.add(res.name[i]);
+                    if(i != 0)
+                        rootStation.add(res.name[i]);
             } else {
-                for (int i = totalStation.indexOf(from); i >= 0; i--)
+                for (int i = totalStation.indexOf(from); i >= 1; i--)
                     rootStation.add(res.name[i]);
                 for (int i = totalStation.size() - 1; i >= totalStation.indexOf(to); i--)
                     rootStation.add(res.name[i]);
@@ -77,11 +79,12 @@ public class Fragment1 extends Fragment {
             int rootDist = totalStation.indexOf(from) - totalStation.indexOf(to);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i >= totalStation.indexOf(to); i--)
-                    rootStation.add(res.name[i]);
+                    if(i != 0)
+                        rootStation.add(res.name[i]);
             } else {
                 for (int i = totalStation.indexOf(from); i <= totalStation.size() - 1; i++)
                     rootStation.add(res.name[i]);
-                for (int i = 0; i <= totalStation.indexOf(to); i++)
+                for (int i = 1; i <= totalStation.indexOf(to); i++)
                     rootStation.add(res.name[i]);
             }
         }
@@ -112,8 +115,10 @@ public class Fragment1 extends Fragment {
             }
 
             Collections.sort(oneSubway, scoreComparator);
+            for(int p = 0; p<oneSubway.size(); p++)
+                System.out.print(oneSubway.get(p).getStation()+"/"+oneSubway.get(p).getSsid()+"/");
             stationSize = oneSubway.size();
-
+            stationSize2 = rootStation.size();
             if(stationSize > 3){
                 for(int j = 0; j< 3; j++){
                     String ssidName = oneSubway.get(j).getSsid();
@@ -153,7 +158,7 @@ public class Fragment1 extends Fragment {
 
             System.out.println(skCnt+"개 "+ktCnt+"개 "+lgCnt+"개 ");
 
-            listener.onInputSent(telecomName,stationSize);
+            listener.onInputSent(telecomName,stationSize2);
             mChildList.add(mChildListContent);
 
         }

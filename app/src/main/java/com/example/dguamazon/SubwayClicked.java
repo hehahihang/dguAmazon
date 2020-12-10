@@ -7,9 +7,9 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -24,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -264,7 +263,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     };
 
     @Override
-    public void onInputSent(final String telecomName, final int stationSize) {
+    public void onInputSent(final String telecomName, final int stationSize2) {
         try{
 //            if(telecomName.equals("KT_WiFi"))
 //                imageviewTelecom.setImageResource(R.drawable.kt);
@@ -272,9 +271,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 //                imageviewTelecom.setImageResource(R.drawable.uplus);
 //            else if(telecomName.equals("SK_WiFi"))
 //                imageviewTelecom.setImageResource(R.drawable.sk);
-
             WIFIName.setText(telecomName);
-            String time = Integer.toString(stationSize*2);
+            String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
         }
         catch (NullPointerException e){

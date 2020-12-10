@@ -26,6 +26,8 @@ public class SubwayList extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subwaylist);
 
+        System.out.println("Start");
+
         final Resources res = new Resources();
         String [] name = res.name;
         final Integer [] code = res.stationCode;
@@ -38,6 +40,7 @@ public class SubwayList extends AppCompatActivity{
         fromSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(fromSpinnerAdapter);
         fromSpinner.setPrompt("FROM");
+
 
         ArrayAdapter<String> toSpinnerAdapter = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_item, name);
         toSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -56,9 +59,7 @@ public class SubwayList extends AppCompatActivity{
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                return;
-            }
+            public void onNothingSelected(AdapterView<?> parent) { return; }
         });
 
         toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
