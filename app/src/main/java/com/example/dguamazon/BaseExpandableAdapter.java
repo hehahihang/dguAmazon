@@ -122,5 +122,4 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
         public ImageView imageView;
         public TextView tv_childName;
     }
-
 }

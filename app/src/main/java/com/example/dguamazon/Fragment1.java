@@ -36,19 +36,35 @@ public class Fragment1 extends Fragment {
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int lgCnt = 0;
+        int lgFreeCnt = 0;
+
         int ktCnt = 0;
+        int ktFreeCnt = 0;
+
         int skCnt = 0;
+
         int max = 0;
+
         int stationSize = 0;
+        int stationSize2 = 0;
+
+        int ktScore = 0;
+        int ktFreeScore = 0;
+        int skScore = 0;
+        int lgScore = 0;
+        int lgFreeScore = 0;
+
+        double maxCutoff = 0;
+        double minCutoff = 0;
 
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
-
 
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
         elv.setAdapter(new BaseExpandableAdapter(getActivity(), rootStation, mChildList));
@@ -65,23 +81,24 @@ public class Fragment1 extends Fragment {
             int rootDist = totalStation.indexOf(to) - totalStation.indexOf(from);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i <= totalStation.indexOf(to); i++)
-                    rootStation.add(res.name[i]);
+                    if(i != 0)
+                        rootStation.add(res.name[i]);
             } else {
-                for (int i = totalStation.indexOf(from); i >= 0; i--)
+                for (int i = totalStation.indexOf(from); i >= 1; i--)
                     rootStation.add(res.name[i]);
                 for (int i = totalStation.size() - 1; i >= totalStation.indexOf(to); i--)
                     rootStation.add(res.name[i]);
             }
-
         } else if (totalStation.indexOf(from) > totalStation.indexOf(to)) {
             int rootDist = totalStation.indexOf(from) - totalStation.indexOf(to);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i >= totalStation.indexOf(to); i--)
-                    rootStation.add(res.name[i]);
+                    if(i != 0)
+                        rootStation.add(res.name[i]);
             } else {
                 for (int i = totalStation.indexOf(from); i <= totalStation.size() - 1; i++)
                     rootStation.add(res.name[i]);
-                for (int i = 0; i <= totalStation.indexOf(to); i++)
+                for (int i = 1; i <= totalStation.indexOf(to); i++)
                     rootStation.add(res.name[i]);
             }
         }
@@ -97,6 +114,7 @@ public class Fragment1 extends Fragment {
             }
         };
 
+        //1등의 개수를 세서,
         for(int i = 0; i< rootStation.size(); i++){
             ArrayList<Data> oneSubway = new ArrayList<>();
             ArrayList<String> mChildListContent = new ArrayList<>();
@@ -112,20 +130,81 @@ public class Fragment1 extends Fragment {
             }
 
             Collections.sort(oneSubway, scoreComparator);
-            stationSize = oneSubway.size();
+            for(int p = 0; p<oneSubway.size(); p++)
+                System.out.print(oneSubway.get(p).getStation()+"/"+oneSubway.get(p).getSsid()+"/");
 
-            if(stationSize > 3){
+            stationSize = oneSubway.size();
+            stationSize2 = rootStation.size();
+
+            if(stationSize >= 3){
                 for(int j = 0; j< 3; j++){
                     String ssidName = oneSubway.get(j).getSsid();
-                    if(ssidName.equals("SK_WiFi"))
+                    Double ssidScore = oneSubway.get(j).getScore();
+                    if(ssidName.equals("SK_WiFi")){
+                        if(ssidScore>=maxCutoff){
+                            skScore += 3;
+                        }
+                        else if(ssidScore<=minCutoff){
+                            skScore += 1;
+                        }
+                        else{
+                            skScore += 2;
+                        }
                         skCnt++;
-                    else if(ssidName.equals("U_WiFi") || ssidName.equals("Free_U_WiFi"))
+                    }
+                    else if(ssidName.equals("U_WiFi")){
+                        if(ssidScore>=maxCutoff){
+                            lgScore += 3;
+                        }
+                        else if(ssidScore<=minCutoff){
+                            lgScore += 2 ;
+                        }
+                        else{
+                            lgScore += 1;
+                        }
                         lgCnt++;
-                    else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
+                    }
+                    else if(ssidName.equals("Free_U_WiFi")){
+                        if(ssidScore>=maxCutoff){
+                            lgFreeScore += 3;
+                        }
+                        else if(ssidScore<=minCutoff){
+                            lgFreeScore += 2;
+                        }
+                        else{
+                            lgFreeScore += 1;
+                        }
+                        lgCnt++;
+                    }
+                    else if(ssidName.equals("KT_Free_WiFi")){
+                        if(ssidScore>=maxCutoff){
+                            ktFreeScore += 3;
+                        }
+                        else if(ssidScore<=minCutoff){
+                            ktFreeScore += 2;
+                        }
+                        else{
+                            ktFreeScore += 1;
+                        }
                         ktCnt++;
-                    mChildListContent.add(oneSubway.get(j).getSsid());
+                    }
+
+                    else if(ssidName.equals("KT_WiFi")){
+                        if(ssidScore>=maxCutoff){
+                            ktScore += 3;
+                        }
+                        else if(ssidScore<=minCutoff){
+                            ktScore += 2;
+                        }
+                        else{
+                            ktScore += 1;
+                        }
+                        ktCnt++;
+                    }
+                    mChildListContent.add(ssidName);
                 }
             }
+
             else if(stationSize < 3 && stationSize != 0){
                 for(int j = 0; j< oneSubway.size(); j++){
                     String ssidName = oneSubway.get(j).getSsid();
@@ -135,12 +214,14 @@ public class Fragment1 extends Fragment {
                         lgCnt++;
                     else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
                         ktCnt++;
-                    mChildListContent.add(oneSubway.get(j).getSsid());
+                    mChildListContent.add(ssidName);
                 }
             }
+
             else{
-                mChildListContent.add("");
+                mChildListContent.add("이게 왜들어가?");
             }
+
             String telecomName = "";
             max = Math.max(skCnt,Math.max(ktCnt,lgCnt));
 
@@ -153,9 +234,8 @@ public class Fragment1 extends Fragment {
 
             System.out.println(skCnt+"개 "+ktCnt+"개 "+lgCnt+"개 ");
 
-            listener.onInputSent(telecomName,stationSize);
+            listener.onInputSent(telecomName,stationSize2);
             mChildList.add(mChildListContent);
-
         }
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(

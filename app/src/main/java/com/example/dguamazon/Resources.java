@@ -14,7 +14,16 @@ class Resources {
             "","","","","Holt Children's Services, inc", "","","","","Chugye Univ. for the Arts", "Kyonggi Univ."};
 
     //station name
-    public static String[] name = {"<SELECT>","City Hall", "Euljiro 1(il)-ga", "Euljiro 3(sam)-ga", "Euljiro 4(sa)-ga",
+    public static String[] name = {"Select From Station","City Hall", "Euljiro 1(il)-ga", "Euljiro 3(sam)-ga", "Euljiro 4(sa)-ga",
+            "Dongdaemun History & Culture Park", "Sindang", "Sangwangsimni",
+            "Wangsimni", "Hanyang Univ.", "Ttukseom", "Seongsu", "Konkuk Univ.",
+            "Guui", "Gangbyeon", "Jamsillaru", "Jamsil", "Jamsilsaenae", "Sports Complex", "Samseong",
+            "Seolleung", "Yeoksam", "Gangnam", "Seoul Nat'l Univ. of Education", "Seocho", "Bangbae", "Sadang",
+            "Nakseongdae", "Seoul Nat'l Univ.", "Bongcheon", "Sillim", "Sindaebang", "Guro Digital Complex", "Daerim",
+            "Sindorim", "Mullae", "Yeongdeungpo-gu Office", "Dangsan", "Hapjeong",
+            "Hongik Univ.", "Sinchon", "Ewha Womans Univ.", "Ahyeon", "Chungjeongno"};
+
+    public static String[] name2 = {"Select To Station","City Hall", "Euljiro 1(il)-ga", "Euljiro 3(sam)-ga", "Euljiro 4(sa)-ga",
             "Dongdaemun History & Culture Park", "Sindang", "Sangwangsimni",
             "Wangsimni", "Hanyang Univ.", "Ttukseom", "Seongsu", "Konkuk Univ.",
             "Guui", "Gangbyeon", "Jamsillaru", "Jamsil", "Jamsilsaenae", "Sports Complex", "Samseong",

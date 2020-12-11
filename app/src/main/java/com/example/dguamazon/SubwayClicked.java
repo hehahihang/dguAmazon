@@ -1,13 +1,14 @@
 package com.example.dguamazon;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.text.Html;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -34,16 +35,22 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     //데이터베이스 불러오기위한 DBHelper;
     DataAdapter mDbHelper;
 
+
+    //로딩
+    private ProgressDialog progressDialog;
+
     //현재 날씨, 기온, 날짜를 출력하는 Textview
     TextView weather;
     TextView temperature;
     TextView day;
     TextView totalTime;
+    TextView today;
     TextView WIFIName;
 
     ImageView imageviewTelecom;
     ImageView imageviewWeather;
     ImageView imageviewWIFI;
+    ImageView imageviewClock;
 
     //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
     List<Data> subwayData = new ArrayList<>();
@@ -52,8 +59,9 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     private long now = System.currentTimeMillis();
     Date date = new Date(now);
     SimpleDateFormat formatHour = new SimpleDateFormat("HH");
+    SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
     String Hours = formatHour.format(date);
-
+    String Today = formatTime.format(date);
     //프래그먼트 전환을 위한 탭
     TabLayout tabs;
 
@@ -79,6 +87,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        runDialog(2);
         setContentView(R.layout.itemclicked);
 
 //        ListView listView = (ListView) findViewById(R.id.subwayListView);
@@ -98,6 +108,13 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         imageviewWIFI = findViewById(R.id.imageviewWIFI);
         imageviewWeather = findViewById(R.id.imageviewWeather);
 //        imageviewTelecom = findViewById(R.id.imageviewTelecom);
+
+        today = findViewById(R.id.today);
+        today.setText(Today);
+
+        imageviewClock = findViewById(R.id.imageviwClock);
+        imageviewClock.setImageResource(R.drawable.ic_clock_foreground);
+
         totalTime = findViewById(R.id.totalTime);
         WIFIName = findViewById(R.id.textviewWIFIName);
 
@@ -210,7 +227,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     mDbHelper.open();
 
                     //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
-                    subwayData = mDbHelper.getTableData(fromCode, toCode, weatherText, dayText, Hours);
+                    subwayData = mDbHelper.getTableData(fromCode,toCode, weatherText, dayText, Hours);
+
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
@@ -264,8 +282,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         }
     };
 
-    @Override
-    public void onInputSent(final String telecomName, int stationSize) {
+
+    public void onInputSent(final String telecomName, final int stationSize2) {
         try{
 //            if(telecomName.equals("KT_WiFi"))
 //                imageviewTelecom.setImageResource(R.drawable.kt);
@@ -273,9 +291,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 //                imageviewTelecom.setImageResource(R.drawable.uplus);
 //            else if(telecomName.equals("SK_WiFi"))
 //                imageviewTelecom.setImageResource(R.drawable.sk);
-
             WIFIName.setText(telecomName);
-            String time = Integer.toString(stationSize*2);
+            String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
         }
         catch (NullPointerException e){
@@ -289,5 +306,20 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         if(requestCode==0){
             Toast.makeText(this, "와이파이 변경이 완료되었습니다!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //로딩 창
+    private void runDialog(final int seconds) {
+        progressDialog = ProgressDialog.show(this, "Please wait....", "Loading now. Please wait");
+        new Thread(new Runnable(){
+            public void run(){
+                try {
+                    Thread.sleep(seconds * 1000);
+                    progressDialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

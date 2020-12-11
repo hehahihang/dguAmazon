@@ -52,28 +52,13 @@ public class DataAdapter  {
         mDbHelper.close();
     }
 
+    //(정방향)fromCode가 작을때
     public List getTableData(int fromCode, int toCode, String weatherText, String dayText, String Hours){
 
         try{
-            String sql = "";
-            String [] args;
-
             //조건에 따라 출력하는 SQL쿼리
-            String sql1 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)" ;
-            String [] args1 = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
-
-            String sql2 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)";
-            String [] args2 = {Integer.toString(toCode), Integer.toString(fromCode), weatherText, dayText, Hours};
-
-            if(fromCode<toCode){
-                sql = sql1;
-                args = args1;
-            }
-            else{
-                sql = sql2;
-                args = args2;
-            }
-
+            String sql = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)" ;
+            String [] args = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
 
             List<Data> subwayList = new ArrayList();
             Data data = null;
