@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -264,7 +265,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     };
 
     @Override
-    public void onInputSent(final String telecomName, final int stationSize) {
+    public void onInputSent(final String telecomName, int stationSize) {
         try{
 //            if(telecomName.equals("KT_WiFi"))
 //                imageviewTelecom.setImageResource(R.drawable.kt);
