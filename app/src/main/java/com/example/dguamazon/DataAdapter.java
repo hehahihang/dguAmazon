@@ -65,14 +65,29 @@ public class DataAdapter  {
             String sql2 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)";
             String [] args2 = {Integer.toString(toCode), Integer.toString(fromCode), weatherText, dayText, Hours};
 
-            if(fromCode<toCode){
+            String sql3 = "SELECT * FROM " + TABLE_NAME + " WHERE(code BETWEEN 201 AND ? OR code BETWEEN ? AND 243) AND (weather = ? AND days = ? AND hours = ?)";
+            String [] args3 = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
+
+            String sql4 = "SELECT * FROM " + TABLE_NAME + " WHERE(code BETWEEN 201 AND ? OR code BETWEEN ? AND 243) AND (weather = ? AND days = ? AND hours = ?)";
+            String [] args4 = {Integer.toString(toCode), Integer.toString(fromCode), weatherText, dayText, Hours};
+
+            if(fromCode<toCode && (toCode - fromCode) <= 21){
                 sql = sql1;
                 args = args1;
             }
-            else{
+            else if(fromCode>toCode && (fromCode - toCode <= 21)){
                 sql = sql2;
                 args = args2;
             }
+            else if(fromCode<toCode && (toCode - fromCode > 21)){
+                sql = sql3;
+                args = args3;
+            }
+            else{
+                sql = sql4;
+                args = args4;
+            }
+
 
 
             List<Data> subwayList = new ArrayList();

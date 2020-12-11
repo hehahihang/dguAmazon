@@ -108,15 +108,17 @@ public class Fragment1 extends Fragment {
             //그 역 이름이랑 getStation이랑 같은 data들만 모은다.
             for(int j = 0; j < subwayData.size(); j++){
                 Data data = (Data) subwayData.get(j);
+                System.out.println(data.getStation()+"/"+data.getSsid()+"/"+data.getScore()+"/");
                 //rootStation의 i번째 인덱스 역이랑 이름이 같은 data만 oneSubway에 모은다.
                 if(data.getStation().equals(rootStation.get(i))){
                     oneSubway.add(data);
+
                 }
             }
 
             Collections.sort(oneSubway, scoreComparator);
             for(int p = 0; p<oneSubway.size(); p++)
-                System.out.print(oneSubway.get(p).getStation()+"/"+oneSubway.get(p).getSsid()+"/");
+                System.out.print(oneSubway.get(p).getStation()+"/"+oneSubway.get(p).getSsid()+"/"+oneSubway.get(p).getScore());
             stationSize = oneSubway.size();
             stationSize2 = rootStation.size();
             if(stationSize > 3){
