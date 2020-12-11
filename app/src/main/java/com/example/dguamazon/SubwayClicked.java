@@ -108,11 +108,11 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         imageviewWeather = findViewById(R.id.imageviewWeather);
 //        imageviewTelecom = findViewById(R.id.imageviewTelecom);
 
-        today = findViewById(R.id.today);
-        today.setText(Today);
-
-        imageviewClock = findViewById(R.id.imageviwClock);
-        imageviewClock.setImageResource(R.drawable.ic_clock_foreground);
+//        today = findViewById(R.id.today);
+//        today.setText(Today);
+//
+//        imageviewClock = findViewById(R.id.imageviwClock);
+//        imageviewClock.setImageResource(R.drawable.ic_clock_foreground);
 
         totalTime = findViewById(R.id.totalTime);
         WIFIName = findViewById(R.id.textviewWIFIName);

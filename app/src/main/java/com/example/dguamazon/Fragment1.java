@@ -59,8 +59,9 @@ public class Fragment1 extends Fragment {
         int lgScore = 0;
         int lgFreeScore = 0;
 
-        double maxCutoff = 0;
-        double minCutoff = 0;
+        //0.566793  0.429575
+        double maxCutoff = 0.566793;
+        double minCutoff = 0.429575;
 
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
@@ -159,10 +160,10 @@ public class Fragment1 extends Fragment {
                             lgScore += 3;
                         }
                         else if(ssidScore<=minCutoff){
-                            lgScore += 2 ;
+                            lgScore += 1 ;
                         }
                         else{
-                            lgScore += 1;
+                            lgScore += 2;
                         }
                         lgCnt++;
                     }
@@ -171,24 +172,24 @@ public class Fragment1 extends Fragment {
                             lgFreeScore += 3;
                         }
                         else if(ssidScore<=minCutoff){
-                            lgFreeScore += 2;
-                        }
-                        else{
                             lgFreeScore += 1;
                         }
-                        lgCnt++;
+                        else{
+                            lgFreeScore += 2;
+                        }
+                        lgFreeCnt++;
                     }
                     else if(ssidName.equals("KT_Free_WiFi")){
                         if(ssidScore>=maxCutoff){
                             ktFreeScore += 3;
                         }
                         else if(ssidScore<=minCutoff){
-                            ktFreeScore += 2;
-                        }
-                        else{
                             ktFreeScore += 1;
                         }
-                        ktCnt++;
+                        else{
+                            ktFreeScore += 2;
+                        }
+                        ktFreeCnt++;
                     }
 
                     else if(ssidName.equals("KT_WiFi")){
@@ -207,34 +208,41 @@ public class Fragment1 extends Fragment {
                 }
             }
 
-            else if(stationSize < 3 && stationSize != 0){
-                for(int j = 0; j< oneSubway.size(); j++){
-                    String ssidName = oneSubway.get(j).getSsid();
-                    if(ssidName.equals("SK_WiFi"))
-                        skCnt++;
-                    else if(ssidName.equals("U_WiFi") || ssidName.equals("Free_U_WiFi"))
-                        lgCnt++;
-                    else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
-                        ktCnt++;
-                    mChildListContent.add(ssidName);
-                }
-            }
-
-            else{
-                mChildListContent.add("이게 왜들어가?");
-            }
+//            else if(stationSize < 3 && stationSize != 0){
+//                for(int j = 0; j< oneSubway.size(); j++){
+//                    String ssidName = oneSubway.get(j).getSsid();
+//                    if(ssidName.equals("SK_WiFi"))
+//                        skCnt++;
+//                    else if(ssidName.equals("U_WiFi") || ssidName.equals("Free_U_WiFi"))
+//                        lgCnt++;
+//                    else if(ssidName.equals("KT_Free_WiFi") || ssidName.equals("KT_WiFi"))
+//                        ktCnt++;
+//                    mChildListContent.add(ssidName);
+//                }
+//            }
+//
+//            else{
+//                mChildListContent.add("이게 왜들어가?");
+//            }
 
             String telecomName = "";
-            max = Math.max(skCnt,Math.max(ktCnt,lgCnt));
+            int ktMax = Math.max(ktFreeCnt,ktCnt);
+            int lgMax = Math.max(lgFreeCnt,lgCnt);
+            int skMax = skCnt;
+
+            //가장 점수가 높은 하나를 뽑느다.
+            max = Math.max(skMax,Math.max(lgMax,ktMax));
 
             if(skCnt==max)
                 telecomName = "SK_WiFi";
+            else if (ktFreeCnt==max)
+                telecomName = "KT_Free_WiFi";
+            else if(lgFreeCnt==max)
+                telecomName = "Free_U_WiFi";
             else if (ktCnt==max)
                 telecomName = "KT_WiFi";
             else if (lgCnt==max)
                 telecomName = "U_WiFi";
-
-            System.out.println(skCnt+"개 "+ktCnt+"개 "+lgCnt+"개 ");
 
             listener.onInputSent(telecomName,stationSize2);
             mChildList.add(mChildListContent);
