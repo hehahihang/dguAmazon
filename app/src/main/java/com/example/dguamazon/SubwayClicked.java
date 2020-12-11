@@ -87,7 +87,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        runDialog(2);
+        runDialog(3);
         setContentView(R.layout.itemclicked);
 
 //        ListView listView = (ListView) findViewById(R.id.subwayListView);
@@ -231,8 +231,14 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
+
+//                    Intent sub = new Intent(getApplicationContext(), BaseExpandableAdapter.class);
+//                    sub.putParcelableArrayListExtra("subwayData", subwayData);
+//                    startActivity(sub);
+
                     //ArrayList 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
+
                     fragment1.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
