@@ -130,12 +130,10 @@
 
                 <ImageView
                     android:id="@+id/imageviewWIFI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_wifi_black_24dp"/>
-
-
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/greencolor"/>
 
             </LinearLayout>
 
@@ -196,6 +194,8 @@
                     android:text="현재시각"
                     android:id="@+id/today"
                     android:textColor="#000000"/>
+
+
             </LinearLayout>
 
         </LinearLayout>

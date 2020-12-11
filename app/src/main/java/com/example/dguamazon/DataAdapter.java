@@ -17,7 +17,8 @@ public class DataAdapter  {
     private final Context mContext;
     private SQLiteDatabase mDb;
     private DataBaseHelper mDbHelper;
-
+    private String [] args;
+    private String sql;
 
     public DataAdapter(Context context){
         this.mContext = context;
@@ -52,13 +53,12 @@ public class DataAdapter  {
         mDbHelper.close();
     }
 
+    //(정방향)fromCode가 작을때
     public List getTableData(int fromCode, int toCode, String weatherText, String dayText, String Hours){
 
         try{
-            String sql = "";
-            String [] args;
-
             //조건에 따라 출력하는 SQL쿼리
+
             String sql1 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)" ;
             String [] args1 = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
 
@@ -87,7 +87,6 @@ public class DataAdapter  {
                 sql = sql4;
                 args = args4;
             }
-
 
 
             List<Data> subwayList = new ArrayList();

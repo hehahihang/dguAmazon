@@ -226,7 +226,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     mDbHelper.open();
 
                     //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
-                    subwayData = mDbHelper.getTableData(fromCode, toCode, weatherText, dayText, Hours);
+                    subwayData = mDbHelper.getTableData(fromCode,toCode, weatherText, dayText, Hours);
+
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
@@ -280,7 +281,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         }
     };
 
-    @Override
+
     public void onInputSent(final String telecomName, final int stationSize2) {
         try{
 //            if(telecomName.equals("KT_WiFi"))
@@ -306,6 +307,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         }
     }
 
+    //로딩 창
     private void runDialog(final int seconds) {
         progressDialog = ProgressDialog.show(this, "Please wait....", "Loading now. Please wait");
         new Thread(new Runnable(){

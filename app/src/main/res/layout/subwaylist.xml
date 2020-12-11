@@ -11,26 +11,21 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_wifi_black_24dp"></ImageView>
+
+        <ImageView
+            android:layout_marginTop="10dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:src="@drawable/subway"></ImageView>
 
-
-        
-        <TextView
-            android:layout_marginTop="110dp"
-            android:layout_gravity="left"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_marginLeft="20dp"
-            android:text="FROM"></TextView>
-
         <Spinner
+            android:layout_marginTop="140dp"
             android:spinnerMode="dialog"
             android:id="@+id/fromSpinner"
             android:layout_width="match_parent"
@@ -40,18 +35,8 @@
             android:background="@drawable/customborder">
         </Spinner>
 
-        <TextView
-            android:layout_marginTop="25dp"
-            android:layout_gravity="left"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_marginLeft="20dp"
-            android:text="TO"></TextView>
-
         <Spinner
+            android:layout_marginTop="20dp"
             android:spinnerMode="dialog"
             android:id="@+id/toSpinner"
             android:layout_width="match_parent"
