@@ -11,21 +11,30 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class BaseExpandableAdapter extends BaseExpandableListAdapter {
-    private ArrayList<String> rootStation = null;
+    private ArrayList<ArrayList<Data>> manyStation = null;
     private ArrayList<ArrayList<String>> childList = null;
+    private ArrayList<String> rootStation = null;
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
     private Data data = new Data();
-    private ArrayList<ArrayList<Data>> Path;
+    private String telecomName;
+    SubwayClicked subwayClicked;
+
     double maxCutoff = 0.566793;
     double minCutoff = 0.429575;
 
-
-    public BaseExpandableAdapter(Context c, ArrayList<String> rootStation, ArrayList<ArrayList<String>> childList){
+    public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList, ArrayList<String> rootStation){
         super();
         this.inflater = LayoutInflater.from(c);
         this.rootStation = rootStation;
+        this.manyStation = manyStation;
         this.childList = childList;
+    }
+
+    public BaseExpandableAdapter(SubwayClicked activity) {
+        subwayClicked = activity;
+        telecomName = subwayClicked.telecomName;
+        System.out.println(telecomName);
     }
 
     // 그룹 포지션을 반환한다.
@@ -58,6 +67,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
             viewHolder = (ViewHolder)v.getTag();
         }
 
+        viewHolder.tv_groupName.setText(getGroup(groupPosition));
 
 //        펼쳐지는 화살표
         if(isExpanded){

@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -74,9 +75,11 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     int fromCode;
     int toCode;
 
+    String telecomName;
+
     Button buttonWifiSetting;
 //    Resources res = new Resources();
-//    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
+//    ArrayList<String> totalStation = new ArayList<>(Arrays.asList(res.name));
 //    protected ArrayList<String> rootStation = null;
 
     @Override
@@ -113,7 +116,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         toCode = intent.getIntExtra("toCode",-1);
 
         if(fromCode!=-1 && toCode!=-1){
-            System.out.println("출발지 코드 : "+ fromCode+" 도착지 코드 : "+toCode);
+//            System.out.println("출발지 코드 : "+ fromCode+" 도착지 코드 : "+toCode);
         }
 
 //      fragment 실행을 위한 부분
@@ -228,10 +231,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
 
-//                    Intent sub = new Intent(getApplicationContext(), BaseExpandableAdapter.class);
-//                    sub.putParcelableArrayListExtra("subwayData", subwayData);
-//                    startActivity(sub);
-
                     //ArrayList 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
 
@@ -286,6 +285,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 
     public void onInputSent(final String telecomName, final int stationSize2, double max) {
         try{
+            this.telecomName = telecomName;
             if(telecomName.equals("KT_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.kt);
                 WIFIName.setText("KT_WiFi");
@@ -313,6 +313,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
             String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
+
+            BaseExpandableAdapter adapter = new BaseExpandableAdapter(this);
         }
         catch (NullPointerException e){
             e.printStackTrace();
