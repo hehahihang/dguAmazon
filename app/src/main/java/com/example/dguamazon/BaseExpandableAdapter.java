@@ -57,23 +57,24 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
         viewHolder.tv_groupName.setText(getGroup(groupPosition));
         System.out.println("viewHolder의 역 이름은 : "+getGroup(groupPosition));
-
-        System.out.println("viewHolder의 역 1등 와이파이는 : "+getGroup(groupPosition));
-
+        if(getGroup(groupPosition).equals("Wangsimni"))
+            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
+        else
+            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
 //        이 부분에서 rootStation 가져오고 data도 가져와서 역마다 onesubway만들고 1등이 0.~~ 넘으면
 //        OR 1등와이파이 계산을 클릭드에서 하고 FRAGMENT로 넘어와서 그 1등..? 으아ㅡ낭르ㅏ
 
 
 
-        int rd = (int) (Math.random()*3 + 1);
-
-
-        if(rd == 1)
-            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
-        else if(rd == 2)
-            viewHolder.tv_traffic.setImageResource(R.drawable.orangecolor);
-        else
-            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
+//        int rd = (int) (Math.random()*3 + 1);
+//
+//
+//        if(rd == 1)
+//            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
+//        else if(rd == 2)
+//            viewHolder.tv_traffic.setImageResource(R.drawable.orangecolor);
+//        else
+//            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
 
 //        펼쳐지는 화살표
         if(isExpanded){
