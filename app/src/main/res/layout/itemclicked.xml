@@ -35,7 +35,6 @@
                     android:layout_weight="1"
                     android:text="출발역"
                     android:textColor="#000000"
-                    android:textStyle="bold"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:singleLine="true"
@@ -61,7 +60,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="도착역"
-                    android:textStyle="bold"
                     android:textColor="#000000"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -96,26 +94,22 @@
                     android:layout_width="wrap_content"
                     android:textColor="#000000"
                     android:text="소요시간"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="min"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
+                    android:textSize="10dp"
                     android:textColor="#000000"></TextView>
-
         </LinearLayout>
-
-
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
 
                 <TextView
                     android:id="@+id/textviewWIFIName"
@@ -132,13 +126,8 @@
                     android:id="@+id/imageviewWIFI"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/greencolor"/>
-
+                    android:layout_gravity="center"/>
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 
@@ -183,18 +172,30 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageviwClock"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="현재시각"
-                    android:id="@+id/today"
-                    android:textColor="#000000"/>
 
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/imageviwClock"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="5dp"-->
+<!--                    android:text="현재시각"-->
+<!--                    android:id="@+id/today"-->
+<!--                    android:textColor="#000000"/>-->
+
+                <ImageView
+                    android:id="@+id/imageviewTelecom"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"></ImageView>
+
+                <Button
+                    android:id="@+id/wifiSetting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wi-Fi SETTING"
+                    android:textSize="15dp"></Button>
 
             </LinearLayout>
 
