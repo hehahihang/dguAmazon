@@ -126,8 +126,7 @@
                     android:id="@+id/imageviewWIFI"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/redcolor"/>
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -186,7 +185,13 @@
 <!--                    android:id="@+id/today"-->
 <!--                    android:textColor="#000000"/>-->
 
+                <ImageView
+                    android:id="@+id/imageviewTelecom"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"></ImageView>
+
                 <Button
+                    android:id="@+id/wifiSetting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Wi-Fi SETTING"

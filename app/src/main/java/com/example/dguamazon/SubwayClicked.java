@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     Date date = new Date(now);
     SimpleDateFormat formatHour = new SimpleDateFormat("HH");
     SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-    String Hours = formatHour.format(date);
+    String Hours = "7";
     String Today = formatTime.format(date);
     //프래그먼트 전환을 위한 탭
     TabLayout tabs;
@@ -79,6 +80,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     String telName;
 
 
+    Button buttonWifiSetting;
 //    Resources res = new Resources();
 //    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
 //    protected ArrayList<String> rootStation = null;
@@ -87,12 +89,12 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        runDialog(2);
+        runDialog(3);
         setContentView(R.layout.itemclicked);
 
 //        ListView listView = (ListView) findViewById(R.id.subwayListView);
         //전단계(출발/도착지 고르기)로 돌아가기
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         TextView name = (TextView) findViewById(R.id.clickedStation);
         fromName = intent.getStringExtra("fromName");
@@ -106,13 +108,15 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 
         imageviewWIFI = findViewById(R.id.imageviewWIFI);
         imageviewWeather = findViewById(R.id.imageviewWeather);
-//        imageviewTelecom = findViewById(R.id.imageviewTelecom);
+        imageviewTelecom = findViewById(R.id.imageviewTelecom);
 
 //        today = findViewById(R.id.today);
 //        today.setText(Today);
 //
 //        imageviewClock = findViewById(R.id.imageviwClock);
 //        imageviewClock.setImageResource(R.drawable.ic_clock_foreground);
+
+        buttonWifiSetting = (Button) findViewById(R.id.wifiSetting);
 
         totalTime = findViewById(R.id.totalTime);
         WIFIName = findViewById(R.id.textviewWIFIName);
@@ -173,6 +177,16 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
         });
 
+        buttonWifiSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                startActivityForResult(intent,0);
+            }
+        });
+
+
+
 //        weather = (TextView) findViewById(R.id.weather1);
         temperature = (TextView) findViewById(R.id.temperature);
         day = (TextView) findViewById(R.id.day);
@@ -231,8 +245,14 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
+
+//                    Intent sub = new Intent(getApplicationContext(), BaseExpandableAdapter.class);
+//                    sub.putParcelableArrayListExtra("subwayData", subwayData);
+//                    startActivity(sub);
+
                     //ArrayList 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
+
                     fragment1.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, fragment1).commit();
 
@@ -284,13 +304,15 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 
     public void onInputSent(final String telecomName, final int stationSize2) {
         try{
-//            if(telecomName.equals("KT_WiFi"))
-//                imageviewTelecom.setImageResource(R.drawable.kt);
-//            else if(telecomName.equals("U_WiFi"))
-//                imageviewTelecom.setImageResource(R.drawable.uplus);
-//            else if(telecomName.equals("SK_WiFi"))
-//                imageviewTelecom.setImageResource(R.drawable.sk);
-            WIFIName.setText(telecomName);
+            if(telecomName.equals("KT_WiFi") || telecomName.equals("KT_Free_WiFi"))
+                imageviewTelecom.setImageResource(R.drawable.kt);
+            else if(telecomName.equals("U_WiFi") || telecomName.equals("Free_U_WiFi"))
+                imageviewTelecom.setImageResource(R.drawable.uplus);
+            else if(telecomName.equals("SK_WiFi"))
+                imageviewTelecom.setImageResource(R.drawable.sk);
+
+
+            WIFIName.setText("SK_WiFi");
             String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
         }
@@ -302,8 +324,12 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(requestCode==0){
-            Toast.makeText(this, "와이파이 변경이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "SUCCESS!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "FAIL!", Toast.LENGTH_SHORT).show();
         }
     }
 
