@@ -120,7 +120,6 @@ public class DataAdapter  {
 
         try{
             //조건에 따라 출력하는 SQL쿼리
-
             String sql1 = "SELECT * FROM " + TABLE_NAME + " WHERE (code BETWEEN ? AND ? ) AND (weather = ? AND days = ? AND hours = ?)" ;
             String [] args1 = {Integer.toString(fromCode), Integer.toString(toCode), weatherText, dayText, Hours};
 

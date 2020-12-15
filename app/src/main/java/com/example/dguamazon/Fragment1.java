@@ -33,7 +33,6 @@ public class Fragment1 extends Fragment {
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
 
-
     SubwaySendList subwaySendList = null;
     Bundle bundle;
 
@@ -72,7 +71,7 @@ public class Fragment1 extends Fragment {
             int rootDist = totalStation.indexOf(to) - totalStation.indexOf(from);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i <= totalStation.indexOf(to); i++)
-                    if(i != 0)
+                    if (i != 0)
                         rootStation.add(res.name[i]);
             } else {
                 for (int i = totalStation.indexOf(from); i >= 1; i--)
@@ -156,6 +155,7 @@ public class Fragment1 extends Fragment {
         ktFreeScore /= rootStation.size();
         lgScore /= rootStation.size();
         lgFreeScore /= rootStation.size();
+
         double maxKT = Math.max(ktScore,ktFreeScore);
         double maxLG = Math.max(lgScore,lgFreeScore);
         double max = Math.max(skScore,Math.max(maxKT,maxLG));
@@ -176,6 +176,7 @@ public class Fragment1 extends Fragment {
             telecomName = "U_Free_WiFi";
         }
 
+        System.out.println(telecomName+"선택이고  "+max+" 이다.");
         listener.onInputSent(telecomName,stationSize2,max);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
