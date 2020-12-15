@@ -1,6 +1,7 @@
 package com.example.dguamazon;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,16 +25,12 @@ import androidx.fragment.app.Fragment;
  */
 public class Fragment1 extends Fragment {
     private Fragment1Listener listener;
-    private Fragment1Listener2 listener2;
 
     public interface Fragment1Listener{
         void onInputSent(String telName, int stationSize, double max);
 
     }
 
-    public interface Fragment1Listener2{
-        void onInputStringSent(String telName);
-    }
     Resources res = new Resources();
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
     protected ArrayList<String> rootStation = null;
@@ -43,6 +40,7 @@ public class Fragment1 extends Fragment {
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
+    String telecomName;
 
     @Nullable
     @Override
@@ -67,7 +65,8 @@ public class Fragment1 extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
-        elv.setAdapter(new BaseExpandableAdapter(getActivity(), manyStation, mChildList));
+
+        elv.setAdapter(new BaseExpandableAdapter(getActivity(), manyStation, mChildList, rootStation));
 
         String from = getArguments().getString("from");
         String to = getArguments().getString("to");
@@ -81,7 +80,7 @@ public class Fragment1 extends Fragment {
             int rootDist = totalStation.indexOf(to) - totalStation.indexOf(from);
             if (rootDist <= 21) {
                 for (int i = totalStation.indexOf(from); i <= totalStation.indexOf(to); i++)
-                    if(i != 0)
+                    if (i != 0)
                         rootStation.add(res.name[i]);
             } else {
                 for (int i = totalStation.indexOf(from); i >= 1; i--)
@@ -118,7 +117,6 @@ public class Fragment1 extends Fragment {
         for(int i = 0; i< rootStation.size(); i++){
             ArrayList<Data> oneSubway = new ArrayList<>();
             ArrayList<String> mChildListContent = new ArrayList<>();
-            System.out.println("역 이름 : " + rootStation.get(i));
 
             //그 역 이름이랑 getStation이랑 같은 data들만 모은다.
             for(int j = 0; j < subwayData.size(); j++){
@@ -163,34 +161,36 @@ public class Fragment1 extends Fragment {
             }
             mChildList.add(mChildListContent);
         }
-        telName = "error";
+
+        telecomName = "error";
 
         skScore /= rootStation.size();
         ktScore /= rootStation.size();
         ktFreeScore /= rootStation.size();
         lgScore /= rootStation.size();
         lgFreeScore /= rootStation.size();
+
         double maxKT = Math.max(ktScore,ktFreeScore);
         double maxLG = Math.max(lgScore,lgFreeScore);
         double max = Math.max(skScore,Math.max(maxKT,maxLG));
 
         if (max == skScore) {
-            telName = "SK_WiFi";
+            telecomName = "SK_WiFi";
         }
         else if(max == ktScore){
-            telName = "KT_WiFi";
+            telecomName = "KT_WiFi";
         }
         else if(max == ktFreeScore){
-            telName = "KT_Free_WiFi";
+            telecomName = "KT_Free_WiFi";
         }
         else if(max == lgScore){
-            telName = "U_WiFi";
+            telecomName = "U_WiFi";
         }
         else if(max == lgFreeScore){
-            telName = "U_Free_WiFi";
+            telecomName = "U_Free_WiFi";
         }
 
-        listener.onInputSent(telName,stationSize2,max);
+        listener.onInputSent(telecomName,stationSize2,max);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -234,6 +234,7 @@ public class Fragment1 extends Fragment {
             +" must implement Framgment1Listener");
         }
     }
+
 
     @Override
     public void onDetach() {

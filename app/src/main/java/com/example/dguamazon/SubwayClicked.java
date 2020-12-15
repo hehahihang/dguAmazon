@@ -41,11 +41,9 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     private ProgressDialog progressDialog;
 
     //현재 날씨, 기온, 날짜를 출력하는 Textview
-    TextView weather;
     TextView temperature;
     TextView day;
     TextView totalTime;
-    TextView today;
     TextView WIFIName;
 
     ImageView imageviewTelecom;
@@ -75,9 +73,11 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     int fromCode;
     int toCode;
 
+    String telecomName;
+
     Button buttonWifiSetting;
 //    Resources res = new Resources();
-//    ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
+//    ArrayList<String> totalStation = new ArayList<>(Arrays.asList(res.name));
 //    protected ArrayList<String> rootStation = null;
 
     @Override
@@ -87,7 +87,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         runDialog(3);
         setContentView(R.layout.itemclicked);
 
-//        ListView listView = (ListView) findViewById(R.id.subwayListView);
+//      ListView listView = (ListView) findViewById(R.id.subwayListView);
         //전단계(출발/도착지 고르기)로 돌아가기
         final Intent intent = getIntent();
 
@@ -105,12 +105,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         imageviewWeather = findViewById(R.id.imageviewWeather);
         imageviewTelecom = findViewById(R.id.imageviewTelecom);
 
-//        today = findViewById(R.id.today);
-//        today.setText(Today);
-//
-//        imageviewClock = findViewById(R.id.imageviwClock);
-//        imageviewClock.setImageResource(R.drawable.ic_clock_foreground);
-
         buttonWifiSetting = (Button) findViewById(R.id.wifiSetting);
 
         totalTime = findViewById(R.id.totalTime);
@@ -120,7 +114,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         toCode = intent.getIntExtra("toCode",-1);
 
         if(fromCode!=-1 && toCode!=-1){
-            System.out.println("출발지 코드 : "+ fromCode+" 도착지 코드 : "+toCode);
+//            System.out.println("출발지 코드 : "+ fromCode+" 도착지 코드 : "+toCode);
         }
 
 //      fragment 실행을 위한 부분
@@ -133,7 +127,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
         bundle.putString("to", name2.getText().toString());
 
         tabs = findViewById(R.id.tabs);
-//        tabs.addTab(tabs.newTab().setText("Operator Recommend"));
         tabs.addTab(tabs.newTab().setText("WiFi Recommend"));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -178,9 +171,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
         });
 
-
-
-//        weather = (TextView) findViewById(R.id.weather1);
         temperature = (TextView) findViewById(R.id.temperature);
         day = (TextView) findViewById(R.id.day);
 
@@ -232,19 +222,12 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     mDbHelper.createDatabase();
                     mDbHelper.open();
 
-                    System.out.println("현재시간 현재시간 현재시간 현재시간"+Hours);
-
-
                     //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
                     subwayData = mDbHelper.getTableData(fromCode,toCode, weatherText, dayText, Hours);
 
                     SubwaySendList subwaySendList = new SubwaySendList();
                     subwaySendList.setDataList((ArrayList<Data>) subwayData);
 
-
-//                    Intent sub = new Intent(getApplicationContext(), BaseExpandableAdapter.class);
-//                    sub.putParcelableArrayListExtra("subwayData", subwayData);
-//                    startActivity(sub);
 
                     //ArrayList 번들에 넣고 최종적으로 fragment1로 subwaydata 넘김
                     bundle.putParcelableArrayList("subwayData", (ArrayList<? extends Parcelable>) subwayData);
@@ -300,6 +283,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
 
     public void onInputSent(final String telecomName, final int stationSize2, double max) {
         try{
+            this.telecomName = telecomName;
             if(telecomName.equals("KT_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.kt);
                 WIFIName.setText("KT_WiFi");
@@ -322,11 +306,13 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
             else if(telecomName.equals("SK_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.sk);
-                WIFIName.setText(("SK_WiFi"));
+                WIFIName.setText("SK_WiFi");
                 setColor(max);
             }
             String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
+
+            BaseExpandableAdapter adapter = new BaseExpandableAdapter(this);
         }
         catch (NullPointerException e){
             e.printStackTrace();
