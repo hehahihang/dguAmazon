@@ -24,15 +24,22 @@ import androidx.fragment.app.Fragment;
  */
 public class Fragment1 extends Fragment {
     private Fragment1Listener listener;
+    private Fragment1Listener2 listener2;
+
     public interface Fragment1Listener{
-        void onInputSent(String telecomName, int stationSize, double max);
+        void onInputSent(String telName, int stationSize, double max);
+
     }
 
+    public interface Fragment1Listener2{
+        void onInputStringSent(String telName);
+    }
     Resources res = new Resources();
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
     ArrayList<ArrayList<Data>> manyStation = null;
+    static String telName = null;
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
@@ -56,6 +63,7 @@ public class Fragment1 extends Fragment {
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
         manyStation = new ArrayList<ArrayList<Data>>();
+        telName = new String();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
@@ -123,9 +131,9 @@ public class Fragment1 extends Fragment {
             Collections.sort(oneSubway, scoreComparator);
 
             manyStation.add(oneSubway);
-            for(int q = 0; q < manyStation.size(); q++){
-                System.out.println("manySatation 역 이름은 : "+manyStation.get(q).get(0).getStation());
-            }
+//            for(int q = 0; q < manyStation.size(); q++){
+//                System.out.println("manySatation 역 이름은 : "+manyStation.get(q).get(0).getStation());
+//            }
 
             stationSize = oneSubway.size();
             stationSize2 = rootStation.size();
@@ -155,7 +163,7 @@ public class Fragment1 extends Fragment {
             }
             mChildList.add(mChildListContent);
         }
-        String telecomName = "error";
+        telName = "error";
 
         skScore /= rootStation.size();
         ktScore /= rootStation.size();
@@ -167,22 +175,22 @@ public class Fragment1 extends Fragment {
         double max = Math.max(skScore,Math.max(maxKT,maxLG));
 
         if (max == skScore) {
-            telecomName = "SK_WiFi";
+            telName = "SK_WiFi";
         }
         else if(max == ktScore){
-            telecomName = "KT_WiFi";
+            telName = "KT_WiFi";
         }
         else if(max == ktFreeScore){
-            telecomName = "KT_Free_WiFi";
+            telName = "KT_Free_WiFi";
         }
         else if(max == lgScore){
-            telecomName = "U_WiFi";
+            telName = "U_WiFi";
         }
         else if(max == lgFreeScore){
-            telecomName = "U_Free_WiFi";
+            telName = "U_Free_WiFi";
         }
 
-        listener.onInputSent(telecomName,stationSize2,max);
+        listener.onInputSent(telName,stationSize2,max);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
@@ -220,6 +228,7 @@ public class Fragment1 extends Fragment {
         if (context instanceof Fragment1Listener){
             listener = (Fragment1Listener) context;
         }
+
         else{
             throw new RuntimeException(context.toString()
             +" must implement Framgment1Listener");
@@ -230,5 +239,6 @@ public class Fragment1 extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+
     }
 }

@@ -13,22 +13,37 @@ import java.util.ArrayList;
 public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     private ArrayList<ArrayList<Data>> manyStation = null;
     private ArrayList<ArrayList<String>> childList = null;
+    private String telName = null;
+
+
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
+
     private Data data = new Data();
 
+
+    double maxCutoff = 0.566793;
+    double minCutoff = 0.429575;
 
     public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList){
         super();
         this.inflater = LayoutInflater.from(c);
         this.manyStation = manyStation;
         this.childList = childList;
+
+
     }
 
     // 그룹 포지션을 반환한다.
     @Override
-    public String getGroup(int groupPosition) {
-        return manyStation.get(groupPosition).get(0).getStation();
+
+    public Data getGroup(int groupPosition) {
+        int telIndex = 0;
+        System.out.println("manyStation 요소 하나의 크기 5가 나와야 정상임 : " + manyStation.get(groupPosition).size() + "/ 1등 와이파이 : " + telName);
+//        for(int i = 0; i < manyStation.get(groupPosition).size(); i++){
+//            if
+//        }
+        return manyStation.get(groupPosition).get(telIndex);
     }
 
     // 그룹 사이즈를 반환한다.
@@ -55,16 +70,19 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
             viewHolder = (ViewHolder)v.getTag();
         }
 
-        viewHolder.tv_groupName.setText(getGroup(groupPosition));
-        System.out.println("viewHolder의 역 이름은 : "+getGroup(groupPosition));
-        if(getGroup(groupPosition).equals("Wangsimni"))
-            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
-        else
-            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
+        viewHolder.tv_groupName.setText(getGroup(groupPosition).getStation());
+//        System.out.println("viewHolder의 역 이름은 : "+getGroup(groupPosition).getStation());
+
 //        이 부분에서 rootStation 가져오고 data도 가져와서 역마다 onesubway만들고 1등이 0.~~ 넘으면
 //        OR 1등와이파이 계산을 클릭드에서 하고 FRAGMENT로 넘어와서 그 1등..? 으아ㅡ낭르ㅏ
 //        OR 1등와이파이 계산을 클릭드에서 하고 FRAGMENT로
 
+        if(getGroup(groupPosition).getScore() > maxCutoff)
+            viewHolder.tv_traffic.setImageResource(R.drawable.greencolor);
+        else if (getGroup(groupPosition).getScore() > minCutoff)
+            viewHolder.tv_traffic.setImageResource(R.drawable.orangecolor);
+        else if (getGroup(groupPosition).getScore() <= minCutoff)
+            viewHolder.tv_traffic.setImageResource(R.drawable.redcolor);
 //
 //
 
@@ -129,6 +147,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) { return true; }
+
 
     class ViewHolder {
         public TextView tv_groupName;
