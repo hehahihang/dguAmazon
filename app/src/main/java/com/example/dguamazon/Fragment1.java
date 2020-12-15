@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 public class Fragment1 extends Fragment {
     private Fragment1Listener listener;
     public interface Fragment1Listener{
-        void onInputSent(String telecomName, int stationSize);
+        void onInputSent(String telecomName, int stationSize, double max);
     }
 
     Resources res = new Resources();
@@ -51,7 +51,7 @@ public class Fragment1 extends Fragment {
         double lgFreeScore = 0;
         double ktScore = 0;
         double ktFreeScore = 0;
-        double skScore;
+        double skScore = 0;
 
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
@@ -114,8 +114,6 @@ public class Fragment1 extends Fragment {
             //그 역 이름이랑 getStation이랑 같은 data들만 모은다.
             for(int j = 0; j < subwayData.size(); j++){
                 Data data = (Data) subwayData.get(j);
-                System.out.println(data.getStation()+"/"+data.getSsid()+"/"+data.getScore()+"/");
-                //rootStation의 i번째 인덱스 역이랑 이름이 같은 data만 oneSubway에 모은다.
                 if(data.getStation().equals(rootStation.get(i))){
                     oneSubway.add(data);
                 }
@@ -132,112 +130,57 @@ public class Fragment1 extends Fragment {
                     Double ssidScore = oneSubway.get(j).getScore();
 
                     if(ssidName.equals("SK_WiFi")){
-
+                        skScore += ssidScore;
                     }
                     else if(ssidName.equals("KT_Free_WiFi")){
-
+                        ktFreeScore += ssidScore;
                     }
                     else if(ssidName.equals("KT_Wifi")){
-
+                        ktScore += ssidScore;
                     }
                     else if(ssidName.equals("U_WiFi")){
-
+                        lgScore += ssidScore;
                     }
-                    else if(ssidName.equals("U_Free_WiFi"))
+                    else if(ssidName.equals("U_Free_WiFi")){
+                        lgFreeScore += ssidScore;
+                    }
                     mChildListContent.add(ssidName);
                 }
             }
-//
-//            else if(stationSize < 3 && stationSize !=0) {
-//                for(int j = 0; j< 3; j++){
-//                    String ssidName = oneSubway.get(j).getSsid();
-//                    Double ssidScore = oneSubway.get(j).getScore();
-//                    if(ssidName.equals("SK_WiFi")){
-//                        if(ssidScore>maxCutoff){
-//                            skScore += 3;
-//                        }
-//                        else if(ssidScore<=minCutoff){
-//                            skScore += 1;
-//                        }
-//                        else{
-//                            skScore += 2;
-//                        }
-//                        skSSid += ssidScore;
-//                        skCnt++;
-//                    }
-//                    else if(ssidName.equals("U_WiFi")){
-//                        if(ssidScore>maxCutoff){
-//                            lgScore += 3;
-//                        }
-//                        else if(ssidScore<=minCutoff){
-//                            lgScore += 1 ;
-//                        }
-//                        else{
-//                            lgScore += 2;
-//                        }
-//                        lgSSid += ssidScore;
-//                        lgCnt++;
-//                    }
-//                    else if(ssidName.equals("Free_U_WiFi")){
-//                        if(ssidScore>maxCutoff){
-//                            lgFreeScore += 3;
-//                        }
-//                        else if(ssidScore<minCutoff){
-//                            lgFreeScore += 1;
-//                        }
-//                        else{
-//                            lgFreeScore += 2;
-//                        }
-//                        lgFreeSSid += ssidScore;
-//                        lgFreeCnt++;
-//                    }
-//                    else if(ssidName.equals("KT_Free_WiFi")){
-//                        if(ssidScore>maxCutoff){
-//                            ktFreeScore += 3;
-//                        }
-//                        else if(ssidScore<minCutoff){
-//                            ktFreeScore += 1;
-//                        }
-//                        else{
-//                            ktFreeScore += 2;
-//                        }
-//                        ktFreeSSid += ssidScore;
-//                        ktFreeCnt++;
-//                    }
-//
-//                    else if(ssidName.equals("KT_WiFi")){
-//                        if(ssidScore>maxCutoff){
-//                            ktScore += 3;
-//                        }
-//                        else if(ssidScore<minCutoff){
-//                            ktScore += 1;
-//                        }
-//                        else{
-//                            ktScore += 2;
-//                        }
-//                        ktSSid += ssidScore;
-//                        ktCnt++;
-//                    }
-//                    mChildListContent.add(ssidName);
-//                }
-//            }
-//
-//            else{
-//                mChildListContent.add("이게 왜들어가?");
-//            }
-
-            String telecomName = "SK_WiFi";
-
-            listener.onInputSent(telecomName,stationSize2);
             mChildList.add(mChildListContent);
         }
+        String telecomName = "error";
+
+        skScore /= rootStation.size();
+        ktScore /= rootStation.size();
+        ktFreeScore /= rootStation.size();
+        lgScore /= rootStation.size();
+        lgFreeScore /= rootStation.size();
+        double maxKT = Math.max(ktScore,ktFreeScore);
+        double maxLG = Math.max(lgScore,lgFreeScore);
+        double max = Math.max(skScore,Math.max(maxKT,maxLG));
+
+        if (max == skScore) {
+            telecomName = "SK_WiFi";
+        }
+        else if(max == ktScore){
+            telecomName = "KT_WiFi";
+        }
+        else if(max == ktFreeScore){
+            telecomName = "KT_Free_WiFi";
+        }
+        else if(max == lgScore){
+            telecomName = "U_WiFi";
+        }
+        else if(max == lgFreeScore){
+            telecomName = "U_Free_WiFi";
+        }
+
+        listener.onInputSent(telecomName,stationSize2,max);
 
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_list_item_1, rootStation);
-
-//        listView.setAdapter(listViewAdapter);
-//        elv.setAdapter(new SavedTabsListAdapter());
 
         elv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
