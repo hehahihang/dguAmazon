@@ -16,6 +16,7 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
 
     private ArrayList<ArrayList<Data>>manyStation = null;
     private ArrayList<String> rootStation = null;
+    private ArrayList<Data> stationSsid  = null;
 
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
@@ -24,31 +25,31 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     private String telecomName;
     SubwayClicked subwayClicked;
 
-    double maxCutoff = 0.566793;
+//    double maxCutoff = 0.566793;
+    double maxCutoff = 0.61;
     double minCutoff = 0.429575;
 
-    public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList, ArrayList<String> rootStation){
+    public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList, ArrayList<String> rootStation, ArrayList<Data> stationSsid){
         super();
         this.inflater = LayoutInflater.from(c);
         this.manyStation = manyStation;
         this.rootStation = rootStation;
+        this.stationSsid = stationSsid;
         this.childList = childList;
-
     }
 
     public BaseExpandableAdapter(SubwayClicked activity) {
         subwayClicked = activity;
-        this.telecomName = subwayClicked.telecomName;
-        System.out.println(telecomName);
+        telecomName = subwayClicked.telecomName;
+//        System.out.println(telecomName);
     }
+
 
     // 그룹 포지션을 반환한다.
     @Override
 
     public Data getGroup(int groupPosition) {
-        int telecomIndex = 0;
-        System.out.println(telecomName);
-        return manyStation.get(groupPosition).get(telecomIndex);
+        return stationSsid.get(groupPosition);
 
     }
 

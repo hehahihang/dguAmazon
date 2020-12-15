@@ -1,7 +1,6 @@
 package com.example.dguamazon;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ public class Fragment1 extends Fragment {
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
     ArrayList<ArrayList<Data>> manyStation = null;
+    private ArrayList<Data> stationSsid = null;
     static String telName = null;
 
     SubwaySendList subwaySendList = null;
@@ -61,12 +61,13 @@ public class Fragment1 extends Fragment {
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
         manyStation = new ArrayList<ArrayList<Data>>();
+        stationSsid = new ArrayList<Data>();
         telName = new String();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
 
-        elv.setAdapter(new BaseExpandableAdapter(getActivity(), manyStation, mChildList, rootStation));
+        elv.setAdapter(new BaseExpandableAdapter(getActivity(), manyStation, mChildList, rootStation, stationSsid));
 
         String from = getArguments().getString("from");
         String to = getArguments().getString("to");
@@ -147,13 +148,13 @@ public class Fragment1 extends Fragment {
                     else if(ssidName.equals("KT_Free_WiFi")){
                         ktFreeScore += ssidScore;
                     }
-                    else if(ssidName.equals("KT_Wifi")){
+                    else if(ssidName.equals("KT_WiFi")){
                         ktScore += ssidScore;
                     }
                     else if(ssidName.equals("U_WiFi")){
                         lgScore += ssidScore;
                     }
-                    else if(ssidName.equals("U_Free_WiFi")){
+                    else if(ssidName.equals("Free_U_WiFi")){
                         lgFreeScore += ssidScore;
                     }
                     mChildListContent.add(ssidName);
@@ -174,6 +175,12 @@ public class Fragment1 extends Fragment {
         double maxLG = Math.max(lgScore,lgFreeScore);
         double max = Math.max(skScore,Math.max(maxKT,maxLG));
 
+        System.out.println("sk : " + skScore);
+        System.out.println("kt : " + ktScore);
+        System.out.println("ktfree : " + ktFreeScore);
+        System.out.println("lg : " + lgScore);
+        System.out.println("lgfree : " + lgFreeScore);
+
         if (max == skScore) {
             telecomName = "SK_WiFi";
         }
@@ -187,7 +194,18 @@ public class Fragment1 extends Fragment {
             telecomName = "U_WiFi";
         }
         else if(max == lgFreeScore){
-            telecomName = "U_Free_WiFi";
+            telecomName = "Free_U_WiFi";
+        }
+
+        for(int i = 0; i<manyStation.size(); i++){
+            for(int j = 0; j < manyStation.get(i).size(); j++){
+                if(manyStation.get(i).get(j).getSsid().equals(telecomName))
+                    stationSsid.add(manyStation.get(i).get(j));
+            }
+        }
+
+        for(int i = 0; i< stationSsid.size(); i++){
+            System.out.println(stationSsid.get(i).getStation()+" / "+stationSsid.get(i).getSsid() + " / "+stationSsid.get(i).getScore());
         }
 
         listener.onInputSent(telecomName,stationSize2,max);
