@@ -35,6 +35,8 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     //데이터베이스 불러오기위한 DBHelper;
     DataAdapter mDbHelper;
 
+    double maxCutoff = 0.566793;
+    double minCutoff = 0.429575;
 
     //로딩
     private ProgressDialog progressDialog;
@@ -50,18 +52,15 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     ImageView imageviewTelecom;
     ImageView imageviewWeather;
     ImageView imageviewWIFI;
-    ImageView imageviewClock;
 
     //DB에서 조건에 맞는 객체를 추출하여 저장할 ArrayList<Data>
     List<Data> subwayData = new ArrayList<>();
 
     //현재 시간(HH)을 받아오기 위해 사용한 currentTimeMills, Date 클래스, SDF
+    SimpleDateFormat formatHour = new SimpleDateFormat("HH");
     private long now = System.currentTimeMillis();
     Date date = new Date(now);
-    SimpleDateFormat formatHour = new SimpleDateFormat("HH");
-    SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-    String Hours = "7";
-    String Today = formatTime.format(date);
+    String Hours = formatHour.format(date);
     //프래그먼트 전환을 위한 탭
     TabLayout tabs;
 
@@ -76,9 +75,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     //출발지 도착치 코드
     int fromCode;
     int toCode;
-
-    String telName;
-
 
     Button buttonWifiSetting;
 //    Resources res = new Resources();
@@ -148,8 +144,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                 Fragment selected = null;
                 if (position == 0)
                     selected = fragment1;
-//                else if (position == 1)
-//                    selected = fragment1;
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, selected).commit();
             }
             @Override
@@ -239,6 +233,9 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
                     mDbHelper.createDatabase();
                     mDbHelper.open();
 
+                    System.out.println("현재시간 현재시간 현재시간 현재시간"+Hours);
+
+
                     //출발역, 도착역, 날씨, 요일, 시간 정보를 바탕으로 subwayData를 추출한다.
                     subwayData = mDbHelper.getTableData(fromCode,toCode, weatherText, dayText, Hours);
 
@@ -281,7 +278,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             String weatherText = bundle.getString("weatherText"); //현재 날씨
             String tempText = bundle.getString("tempText"); //현재 온도
             String dayText = bundle.getString("dayText"); //현재 날짜
-//            weather.setText(weatherText + " ");
+
             temperature.setText(tempText + "C");
             day.setText(" " + dayText.toUpperCase());
 
@@ -302,22 +299,49 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     };
 
 
-    public void onInputSent(final String telecomName, final int stationSize2) {
+    public void onInputSent(final String telecomName, final int stationSize2, double max) {
         try{
-            if(telecomName.equals("KT_WiFi") || telecomName.equals("KT_Free_WiFi"))
+            if(telecomName.equals("KT_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.kt);
-            else if(telecomName.equals("U_WiFi") || telecomName.equals("Free_U_WiFi"))
+                WIFIName.setText("KT_WiFi");
+                setColor(max);
+            }
+            else if(telecomName.equals("KT_Free_WiFi")){
+                imageviewTelecom.setImageResource(R.drawable.kt);
+                WIFIName.setText("KT_Free_WiFi");
+                setColor(max);
+            }
+            else if(telecomName.equals("U_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.uplus);
-            else if(telecomName.equals("SK_WiFi"))
+                WIFIName.setText("U_WiFi");
+                setColor(max);
+            }
+            else if(telecomName.equals("Free_U_WiFi")){
+                imageviewTelecom.setImageResource(R.drawable.uplus);
+                WIFIName.setText("Free_U_WiFi");
+                setColor(max);
+            }
+            else if(telecomName.equals("SK_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.sk);
-
-
-            WIFIName.setText("SK_WiFi");
+                setColor(max);
+            }
             String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
         }
         catch (NullPointerException e){
             e.printStackTrace();
+        }
+    }
+
+    private void setColor(double max) {
+        if(max>maxCutoff){
+            imageviewWIFI.setImageResource(R.drawable.greencolor);
+        }
+        else if(max<minCutoff){
+            imageviewWIFI.setImageResource(R.drawable.redcolor);
+        }
+        else{
+            imageviewWIFI.setImageResource(R.drawable.orangecolor);
         }
     }
 
