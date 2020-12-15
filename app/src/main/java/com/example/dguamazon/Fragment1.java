@@ -32,7 +32,7 @@ public class Fragment1 extends Fragment {
     ArrayList<String> totalStation = new ArrayList<>(Arrays.asList(res.name));
     protected ArrayList<String> rootStation = null;
     private ArrayList<ArrayList<String>> mChildList = null;
-
+    ArrayList<ArrayList<Data>> manyStation = null;
 
     SubwaySendList subwaySendList = null;
     Bundle bundle;
@@ -55,10 +55,11 @@ public class Fragment1 extends Fragment {
 
         rootStation = new ArrayList<String>();
         mChildList = new ArrayList<ArrayList<String>>();
+        manyStation = new ArrayList<ArrayList<Data>>();
         View rootView = inflater.inflate(R.layout.fragment_fragment1, container, false);
 
         ExpandableListView elv = (ExpandableListView) rootView.findViewById(R.id.list);
-        elv.setAdapter(new BaseExpandableAdapter(getActivity(), rootStation, mChildList));
+        elv.setAdapter(new BaseExpandableAdapter(getActivity(), manyStation, mChildList));
 
         String from = getArguments().getString("from");
         String to = getArguments().getString("to");
@@ -120,6 +121,11 @@ public class Fragment1 extends Fragment {
             }
 
             Collections.sort(oneSubway, scoreComparator);
+
+            manyStation.add(oneSubway);
+            for(int q = 0; q < manyStation.size(); q++){
+                System.out.println("manySatation 역 이름은 : "+manyStation.get(q).get(0).getStation());
+            }
 
             stationSize = oneSubway.size();
             stationSize2 = rootStation.size();

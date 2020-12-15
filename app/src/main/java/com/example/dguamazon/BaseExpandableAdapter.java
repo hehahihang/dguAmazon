@@ -11,29 +11,29 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class BaseExpandableAdapter extends BaseExpandableListAdapter {
-    private ArrayList<String> rootStation = null;
+    private ArrayList<ArrayList<Data>> manyStation = null;
     private ArrayList<ArrayList<String>> childList = null;
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
     private Data data = new Data();
 
 
-    public BaseExpandableAdapter(Context c, ArrayList<String> rootStation, ArrayList<ArrayList<String>> childList){
+    public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList){
         super();
         this.inflater = LayoutInflater.from(c);
-        this.rootStation = rootStation;
+        this.manyStation = manyStation;
         this.childList = childList;
     }
 
     // 그룹 포지션을 반환한다.
     @Override
     public String getGroup(int groupPosition) {
-        return rootStation.get(groupPosition);
+        return manyStation.get(groupPosition).get(0).getStation();
     }
 
     // 그룹 사이즈를 반환한다.
     @Override
-    public int getGroupCount() { return rootStation.size(); }
+    public int getGroupCount() { return manyStation.size(); }
 
     // 그룹 ID를 반환한다.
     @Override

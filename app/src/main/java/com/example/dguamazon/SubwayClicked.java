@@ -24,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -323,6 +322,7 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             }
             else if(telecomName.equals("SK_WiFi")){
                 imageviewTelecom.setImageResource(R.drawable.sk);
+                WIFIName.setText(("SK_WiFi"));
                 setColor(max);
             }
             String time = Integer.toString((stationSize2-1)*2);
