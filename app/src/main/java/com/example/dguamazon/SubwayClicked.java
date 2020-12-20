@@ -76,9 +76,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
     String telecomName;
 
     Button buttonWifiSetting;
-//    Resources res = new Resources();
-//    ArrayList<String> totalStation = new ArayList<>(Arrays.asList(res.name));
-//    protected ArrayList<String> rootStation = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -312,7 +309,6 @@ public class SubwayClicked extends AppCompatActivity implements Fragment1.Fragme
             String time = Integer.toString((stationSize2-1)*2);
             totalTime.setText(time);
 
-            BaseExpandableAdapter adapter = new BaseExpandableAdapter(this);
         }
         catch (NullPointerException e){
             e.printStackTrace();

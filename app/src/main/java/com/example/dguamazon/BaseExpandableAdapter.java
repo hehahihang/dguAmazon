@@ -21,13 +21,11 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
     private LayoutInflater inflater = null;
     private ViewHolder viewHolder = null;
 
-    private Data data = new Data();
-    private String telecomName;
-    SubwayClicked subwayClicked;
-
 //    double maxCutoff = 0.566793;
-    double maxCutoff = 0.61;
-    double minCutoff = 0.429575;
+//    double minCutoff = 0.429575;
+
+    double maxCutoff = 0.62;
+    double minCutoff = 0.60;
 
     public BaseExpandableAdapter(Context c, ArrayList<ArrayList<Data>> manyStation, ArrayList<ArrayList<String>> childList, ArrayList<String> rootStation, ArrayList<Data> stationSsid){
         super();
@@ -37,13 +35,6 @@ public class BaseExpandableAdapter extends BaseExpandableListAdapter {
         this.stationSsid = stationSsid;
         this.childList = childList;
     }
-
-    public BaseExpandableAdapter(SubwayClicked activity) {
-        subwayClicked = activity;
-        telecomName = subwayClicked.telecomName;
-//        System.out.println(telecomName);
-    }
-
 
     // 그룹 포지션을 반환한다.
     @Override
