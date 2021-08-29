@@ -17,13 +17,12 @@
   
 #### Example
 |Station|Day of the week|Weather|Hour|SSID|Score|
-|:-:|:-:|:-:|:-:|:-:|:-:|
+|:---:|:---:|:---:|:---:|:---:|:---:|
 |강남|금|맑음|5|KT-Wifi|0.4601|
 |강남|금|맑음|5|U-Wifi|0.4648|
 |강남|금|맑음|5|T-Wifi|0.4515|
 |강남|금|맑음|5|KT-Free|0.3758|
 |강남|금|맑음|5|Free-U|0.4645|
-|...|
 
 ## Running the tests / 테스트의 실행
 ### UML
