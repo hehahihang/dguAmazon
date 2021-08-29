@@ -57,7 +57,7 @@
 
 ## Deployment / 배포
 
-Firebase(테스트 배포)
+* Firebase(테스트 배포)
 
 ## Built With / 누구랑 만들었나요?
 
