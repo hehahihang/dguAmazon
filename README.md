@@ -14,7 +14,8 @@
   + 역은 2호선 순환선으로 한정함
   + 시간은 1시간 단위로 한정함
   + Score는 Speed와 Success-Rate 간 가중치를 고려한 값 (0 <= Score <= 1)
-* Example
+  
+#### Example
 |Station|Day of the week|Weather|Hour|SSID|Score|
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |강남|금|맑음|5|KT-Wifi|0.4601|
