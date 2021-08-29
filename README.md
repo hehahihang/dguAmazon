@@ -25,7 +25,9 @@
 |강남|금|맑음|5|KT-Free|0.3758|
 |강남|금|맑음|5|Free-U|0.4645|
 
-## Running the tests / 테스트의 실행
+
+
+## 서비스 설계
 ### UML
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243173-b4215989-0010-40f5-8e43-ed0048a97572.png" width = "700" height="300"/>
@@ -36,12 +38,16 @@
   <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "700" height="300"/>
 </p>
 
+
 ### 핵심 기능(Function)
 * Layout 디자인(ExpandableListView) 및 Activity Diagram/Flow Chart 제작
 * 날씨 데이터 웹 크롤링 (네이버 날씨)
 * 지하철 2호선 출발/도착 최단 경로 알고리즘 구현
 * DB → 경로 내 조건에 따라 와이파이 리스트 추출 및 순위 결정(역/시간대/날씨 조건)
 
+
+
+## Running the tests / 테스트의 실행
 #### Introduce Screens
 
 |Splash Screen|Initial Screen|Choice Screen|
