@@ -31,8 +31,6 @@ public class SubwayList extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subwaylist);
 
-        System.out.println("Start");
-
         final Resources res = new Resources();
         String [] name = res.name;
         final List<String> fromList = new ArrayList<>(Arrays.asList(name));
