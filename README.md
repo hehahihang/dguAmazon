@@ -32,7 +32,11 @@
 </p>
 
 ### 테스트는 이런 식으로 동작합니다
-
+|기본값|왼쪽 정렬|가운데 정렬|오른쪽 정렬|
+|---|:---|:---:|---:|
+|내용 1|내용 2|내용 3|내용 4|
+|내용 5|내용 6|내용 7|내용 8|
+|내용 9|내용 10|내용 11|내용 12|
 * 사용자가 지정한 경로 내에서 지하철 역 별 WiFi 추천, 전체 경로의 통신사 추천을 수행
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1000" height="500"/>
@@ -42,12 +46,6 @@
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png" width = "200"/> <img src = "https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png" width = "200"/> <img src = "https://user-images.githubusercontent.com/37091363/131244380-f0c1388e-f90a-4f31-b934-b080996d5610.png" width = "200"/> <img src = "https://user-images.githubusercontent.com/37091363/131244411-e7924fc4-ce1c-4e00-a0d6-2992278227a6.png" width = "200"/> <img src = "https://user-images.githubusercontent.com/37091363/131244424-3d5f622b-f0fc-4c2f-86e8-8c0026680360.png" width = "200/> <img src = "https://user-images.githubusercontent.com/37091363/131244443-b5751984-a0d3-4791-ba9c-989b56d278b9.png" width = "200"/>
 </p>
-<p align="center">
-|First Image|Second Image|
-|:-:|:-:|
-|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png?h=750&w=200)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png?h=750&w=200)|
-</p>
-
 
 ```
 예시
