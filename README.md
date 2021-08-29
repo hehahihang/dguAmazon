@@ -41,7 +41,8 @@
 * Splash 및 메인 홈 
 |Splash|Main Page|
 |:---:|:---:|
-|![uml_FINAL](https://images.pexels.com/photos/585759/pexels-photo-585759.jpeg?w=200)|![uml_FINAL](https://user-images.githubusercontent.com/37091363/131243020-65c66968-e478-4c2b-8c38-8a9a27a91c3a.png?w=200)|
+|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png?w=200)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png?w=200)
+|
 
 
 ```
