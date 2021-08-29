@@ -41,10 +41,11 @@
 
 ### 핵심 기능(Function)
 📌 Layout 디자인(ExpandableListView) 및 Activity Diagram/Flow Chart 제작
-📌 날씨 데이터 웹 크롤링 (네이버 날씨)
-📌 지하철 2호선 출발/도착 최단 경로 알고리즘 구현
-📌 DB → 경로 내 조건에 따라 와이파이 리스트 추출 및 순위 결정(역/시간대/날씨 조건)<br><br><br><br>
+📌 날씨 데이터 웹 크롤링 (Thread, Handler 이용 비동기 UI처리) (네이버 날씨)
+📌 지하철 2호선 출발/도착 최단 경로 알고리즘 구현 
+📌 DB → 경로 내 조건에 따라 와이파이 리스트 추출 및 순위 결정(역/시간대/날씨 조건)
 
+<br><br><br><br>
 
 
 ## Running the tests / 테스트의 실행
