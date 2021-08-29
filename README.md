@@ -32,23 +32,19 @@
 </p>
 
 ### Flow Chart
-
-#### 사용자가 지정한 경로 내에서 지하철 역 별 WiFi 추천, 전체 경로의 통신사 추천을 수행
-
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1000" height="500"/>
 </p>
 
 #### 실행 화면
-|기본값|왼쪽 정렬|가운데 정렬|오른쪽 정렬|
-|---|:---|:---:|---:|
-|내용 1|내용 2|내용 3|내용 4|
-|내용 5|내용 6|내용 7|내용 8|
-|내용 9|내용 10|내용 11|내용 12|
 
-|Splash Screen|Initial Screen|Choice Screen|Result Screen|Expandable List|Setting Screen|
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png)|![Screenshot_1608091326](https://user-images.githubusercontent.com/37091363/131244829-c72151d3-0a16-4e8b-84f0-c55a8e7d7cbb.png)|![Screenshot_1608091394](https://user-images.githubusercontent.com/37091363/131244835-18673711-4f62-4cc1-9468-7e3866dad7b2.png)|![Screenshot_1608091423](https://user-images.githubusercontent.com/37091363/131244838-0c6704a5-5fae-4b8e-9766-714f0f33cad2.png)|![Screenshot_1608091428](https://user-images.githubusercontent.com/37091363/131244843-5f1e80fe-120c-4f91-b5d4-da10abb8d2a7.png)|
+|Splash Screen|Initial Screen|Choice Screen|
+|:-:|:-:|:-:|
+|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png)|![Screenshot_1608091326](https://user-images.githubusercontent.com/37091363/131244829-c72151d3-0a16-4e8b-84f0-c55a8e7d7cbb.png)|
+
+|Result Screen|Expandable List|Setting Screen|
+|:-:|:-:|:-:|
+|![Screenshot_1608091394](https://user-images.githubusercontent.com/37091363/131244835-18673711-4f62-4cc1-9468-7e3866dad7b2.png)|![Screenshot_1608091423](https://user-images.githubusercontent.com/37091363/131244838-0c6704a5-5fae-4b8e-9766-714f0f33cad2.png)|![Screenshot_1608091428](https://user-images.githubusercontent.com/37091363/131244843-5f1e80fe-120c-4f91-b5d4-da10abb8d2a7.png)|
 
 ```
 예시
