@@ -39,8 +39,10 @@
 </p>
 
 * Splash 및 메인 홈 
-<p align="center"> <img src = "https://user-images.githubusercontent.com/37091363/131242755-1b5598c5-6de8-4408-9323-e18f5976dfbf.png" width = "200" /> <img src = "https://user-images.githubusercontent.com/37091363/131243020-65c66968-e478-4c2b-8c38-8a9a27a91c3a.png" width = "200" />
-</p>
+|Splash|Main Page|
+|:-:|:-:|
+|![First Image](https://images.pexels.com/photos/585759/pexels-photo-585759.jpeg?w=200)|![Second Image]https://user-images.githubusercontent.com/37091363/131243020-65c66968-e478-4c2b-8c38-8a9a27a91c3a.png?w=200)|
+
 
 ```
 예시
