@@ -78,8 +78,8 @@
 
 ## Built With / 누구랑 만들었나요?
 
-* 김민지, 이수영 - 머신러닝 알고리즘 개발, 데이터 가공
-* 오희경, 정광수 - Android 앱 개발
+:two_men_holding_hands: 김민지, 이수영 - 머신러닝 알고리즘 개발, 데이터 가공
+:two_men_holding_hands: 오희경, 정광수 - Android 앱 개발
 
 ## Acknowledgments / 감사의 말
 * 지하철 WIFI관련 데이터를 제공해 주신 (주)AMIFY 및 이광주 대표님께 감사드립니다.
