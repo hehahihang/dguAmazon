@@ -4,8 +4,7 @@
 One Paragraph of project description goes here / 프로젝트의 전반적인 내용에 대한 요약을 여기에 적습니다
 
 ## Getting Started / 어떻게 시작하나요?
-
-이 곳에서 설치에 관련된 이야기를 해주시면 좋습니다.
+![Uplo![Screenshot_1608091428](https://user-images.githubusercontent.com/37091363/131242463-b964ff45-2545-4481-ad60-36a60be0b953.png)
 
 ### Prerequisites / 선행 조건
 
