@@ -36,13 +36,10 @@
   <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "700" height="300"/>
 </p>
 
-<p align='left'>
-Layout 디자인(ExpandableListView) 및 Activity Diagram/Flow Chart 제작
-날씨 데이터 웹 크롤링 (네이버 날씨)
-지하철 2호선 출발/도착 최단 경로 알고리즘 구현
-DB → 경로 내 조건에 따라 와이파이 리스트 추출 및 순위 결정(역/시간대/날씨 조건)
-</p>
-
+* Layout 디자인(ExpandableListView) 및 Activity Diagram/Flow Chart 제작
+* 날씨 데이터 웹 크롤링 (네이버 날씨)
+* 지하철 2호선 출발/도착 최단 경로 알고리즘 구현
+* DB → 경로 내 조건에 따라 와이파이 리스트 추출 및 순위 결정(역/시간대/날씨 조건)
 
 #### Introduce Screens
 
