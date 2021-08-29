@@ -46,15 +46,15 @@
 |:-:|:-:|:-:|
 |![Screenshot_1608091394](https://user-images.githubusercontent.com/37091363/131244835-18673711-4f62-4cc1-9468-7e3866dad7b2.png)|![Screenshot_1608091423](https://user-images.githubusercontent.com/37091363/131244838-0c6704a5-5fae-4b8e-9766-714f0f33cad2.png)|![Screenshot_1608091428](https://user-images.githubusercontent.com/37091363/131244843-5f1e80fe-120c-4f91-b5d4-da10abb8d2a7.png)|
 
-```
-예시
-```
 
-### 테스트는 이런 식으로 작성하시면 됩니다
+### 테스트 시나리오
 
-```
-예시
-```
+#### 사당 → 강남 (평일, 맑은 날씨)
+|오전 출근시간|낮 시간|
+|:-:|:-:|
+|![그림1](https://user-images.githubusercontent.com/37091363/131245708-9dd902a2-e75c-408f-9182-87284abec2b2.png)
+|![그림2](https://user-images.githubusercontent.com/37091363/131245730-fb217598-d5cc-4b2d-9e1d-bc6769eff136.png)|
+
 
 ## Deployment / 배포
 
