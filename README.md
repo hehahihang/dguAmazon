@@ -1,9 +1,10 @@
 # 외국인 관광객 대상 WiFi 추천 서비스
 
-**[뱃지나 프로젝트에 관한 이미지들이 이 위치에 들어가면 좋습니다]**  
-* 외국인들에게 지하철 WiFi 품질정보 분석을 통해, 최적의 WiFi 추천 서비스를 제공합니다.
-  - 사용자가 설정한 경로 내에서, 가장 좋은 품질을 가진 ‘최적의 WiFi 분석 결과를 리스트업’ 형태로 제공
-  - 와이파이 추천 리스트를 토대로 ‘통신사 추천’
+**[뱃지나 프로젝트에 관한 이미지들이 이 위치에 들어가면 좋습니다]**
+
+## * 외국인들에게 지하철 WiFi 품질정보 분석을 통해, 최적의 WiFi 추천 서비스를 제공합니다.
+  ### - 사용자가 설정한 경로 내에서, 가장 좋은 품질을 가진 ‘최적의 WiFi 분석 결과를 리스트업’ 형태로 제공
+  ### - 와이파이 추천 리스트를 토대로 ‘통신사 추천’
 
 ## Getting Started / 어떻게 시작하나요?
 
@@ -26,21 +27,25 @@
 
 ## Running the tests / 테스트의 실행
 
-어떻게 테스트가 이 시스템에서 돌아가는지에 대한 설명을 합니다
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/37091363/131243173-b4215989-0010-40f5-8e43-ed0048a97572.png" width = "1200" height="600"/>
+</p>
 
 ### 테스트는 이런 식으로 동작합니다
 
-* 사용자가 지정한 경로 내에서 지하철 역 별 WiFi 추천, 전체 경로의 통신사 추천을 수행
+### * 사용자가 지정한 경로 내에서 지하철 역 별 WiFi 추천, 전체 경로의 통신사 추천을 수행
 <p align="center">
-  <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1000" height="600"/>
+  <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1200" height="600"/>
 </p>
 
-```
-예시
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131242755-1b5598c5-6de8-4408-9323-e18f5976dfbf.png" width = "600" height="800"/>
   <img src = "https://user-images.githubusercontent.com/37091363/131243020-65c66968-e478-4c2b-8c38-8a9a27a91c3a.png" width = "600" height="800"/>
 </p>
+
+```
+예시
+```
 
 ### 테스트는 이런 식으로 작성하시면 됩니다
 
