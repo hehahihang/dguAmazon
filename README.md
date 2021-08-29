@@ -86,6 +86,7 @@
 
 
 ## Repository
+🏫 동국대학교 산업시스템공학과 / 융합소프트웨어<br>
 [김민지](https://github.com/mostar39)
 [이수영](https://github.com/twin9458)
 [오희경](https://github.com/ohee92)
