@@ -26,25 +26,29 @@
 ```
 
 ## Running the tests / 테스트의 실행
-
+### UML
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243173-b4215989-0010-40f5-8e43-ed0048a97572.png" width = "1200" height="600"/>
 </p>
 
-### 테스트는 이런 식으로 동작합니다
+### Flow Chart
 
 #### 사용자가 지정한 경로 내에서 지하철 역 별 WiFi 추천, 전체 경로의 통신사 추천을 수행
-* UML
+
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1000" height="500"/>
 </p>
 
-* 실행 화면
+#### 실행 화면
 |기본값|왼쪽 정렬|가운데 정렬|오른쪽 정렬|
 |---|:---|:---:|---:|
 |내용 1|내용 2|내용 3|내용 4|
 |내용 5|내용 6|내용 7|내용 8|
 |내용 9|내용 10|내용 11|내용 12|
+
+|First Image|Second Image|
+|:-:|:-:|
+|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png?h=750&w=200)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png?h=750&w=200)|
 
 ```
 예시
