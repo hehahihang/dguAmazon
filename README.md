@@ -1,4 +1,4 @@
-# Project Title / 머신러닝 기법을 활용한 외국인 관광객 대상의 WiFi 추천서비스 개발
+# 외국인 관광객 대상 WiFi 추천 서비스
 
 **[뱃지나 프로젝트에 관한 이미지들이 이 위치에 들어가면 좋습니다]**  
 One Paragraph of project description goes here / 프로젝트의 전반적인 내용에 대한 요약을 여기에 적습니다
