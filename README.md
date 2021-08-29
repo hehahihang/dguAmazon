@@ -64,16 +64,5 @@ Firebase(테스트 배포)
 * 김민지, 이수영 - 머신러닝 알고리즘 개발, 데이터 가공
 * 오희경, 정광수 - Android 앱 개발
 
-## Contributiong / 기여
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us. / [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) 를 읽고 이에 맞추어 pull request 를 해주세요.
-
-## License / 라이센스
-
-This project is licensed under the MIT License - see the [LICENSE.md](https://gist.github.com/PurpleBooth/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
-
 ## Acknowledgments / 감사의 말
-
-* Hat tip to anyone whose code was used / 코드를 사용한 모든 사용자들에게 팁
-* Inspiration / 영감
-* etc / 기타
+* 지하철 WIFI관련 데이터를 제공해 주신 (주)AMIFY 및 이광주 대표님께 감사드립니다.
