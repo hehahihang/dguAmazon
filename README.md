@@ -81,9 +81,6 @@
 👬김민지, 이수영 - 머신러닝 알고리즘 개발, 데이터 핸들링<br>
 👭오희경, 정광수 - Android 앱 개발
 
-## Acknowledgments / 감사의 말
-🙏지하철 WIFI관련 데이터를 제공해 주신 (주)AMIFY 및 이광주 대표님께 감사드립니다.
-
 
 ## Repository
 🏫 동국대학교 산업시스템공학과 / 융합소프트웨어<br>
@@ -91,3 +88,9 @@
 [이수영](https://github.com/twin9458)
 [오희경](https://github.com/ohee92)
 [정광수](https://github.com/hehahihang)
+
+
+
+
+## Acknowledgments / 감사의 말
+🙏지하철 WIFI관련 데이터를 제공해 주신 (주)AMIFY 및 이광주 대표님께 감사드립니다.
