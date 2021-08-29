@@ -61,8 +61,8 @@ Firebase(테스트 배포)
 
 ## Built With / 누구랑 만들었나요?
 
-* [이름](링크) - 무엇 무엇을 했어요
-* [Name](Link) - Create README.md
+* 김민지, 이수영 - 머신러닝 알고리즘 개발, 데이터 가공
+* 오희경, 정광수 - Android 앱 개발
 
 ## Contributiong / 기여
 
