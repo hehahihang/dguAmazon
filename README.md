@@ -46,9 +46,9 @@
 |내용 5|내용 6|내용 7|내용 8|
 |내용 9|내용 10|내용 11|내용 12|
 
-|First Image|Second Image|
-|:-:|:-:|
-|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png?h=750&w=200)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png?h=750&w=200)|
+|Splash Screen|Initial Screen|Choice Screen|Result Screen|Expandable List|Setting Screen|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|![Screenshot_1608096161](https://user-images.githubusercontent.com/37091363/131243785-d10ac4f5-f783-49a2-b443-6c2f538477f6.png?h=750&w=200)|![Screenshot_1608091301](https://user-images.githubusercontent.com/37091363/131243800-a563ae78-2f8f-4ee7-b2d2-9c28dcca6b22.png?h=750&w=200)|![Screenshot_1608091326](https://user-images.githubusercontent.com/37091363/131244829-c72151d3-0a16-4e8b-84f0-c55a8e7d7cbb.png?h=750&w=200)|![Screenshot_1608091394](https://user-images.githubusercontent.com/37091363/131244835-18673711-4f62-4cc1-9468-7e3866dad7b2.png?h=750&w=200)|![Screenshot_1608091423](https://user-images.githubusercontent.com/37091363/131244838-0c6704a5-5fae-4b8e-9766-714f0f33cad2.png?h=750&w=200)|![Screenshot_1608091428](https://user-images.githubusercontent.com/37091363/131244843-5f1e80fe-120c-4f91-b5d4-da10abb8d2a7.png?h=750&w=200)|
 
 ```
 예시
