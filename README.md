@@ -33,7 +33,7 @@
 
 ### Flow Chart
 <p align="center">
-  <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "1000" height="500"/>
+  <img src = "https://user-images.githubusercontent.com/37091363/131243067-b295e2b2-dc36-43f9-a445-d951b3c92c27.png" width = "700" height="300"/>
 </p>
 
 #### Introduce Screens
