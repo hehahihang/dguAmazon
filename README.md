@@ -83,3 +83,10 @@
 
 ## Acknowledgments / 감사의 말
 🙏지하철 WIFI관련 데이터를 제공해 주신 (주)AMIFY 및 이광주 대표님께 감사드립니다.
+
+
+## Repository
+[김민지](https://github.com/mostar39)
+[이수영](https://github.com/twin9458)
+[오희경](https://github.com/ohee92)
+[정광수](https://github.com/hehahihang)
