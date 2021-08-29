@@ -28,7 +28,7 @@
 ## Running the tests / 테스트의 실행
 ### UML
 <p align="center">
-  <img src = "https://user-images.githubusercontent.com/37091363/131243173-b4215989-0010-40f5-8e43-ed0048a97572.png" width = "1200" height="600"/>
+  <img src = "https://user-images.githubusercontent.com/37091363/131243173-b4215989-0010-40f5-8e43-ed0048a97572.png" width = "800" height="600"/>
 </p>
 
 ### Flow Chart
