@@ -6,24 +6,23 @@
   - 사용자가 설정한 경로 내에서, 가장 좋은 품질을 가진 ‘최적의 WiFi 분석 결과를 리스트업’ 형태로 제공
   - 와이파이 추천 리스트를 토대로 ‘통신사 추천’
 
-## Getting Started / 어떻게 시작하나요?
 
+### Data / 활용 데이터
 
-### Prerequisites / 선행 조건
-
-아래 사항들이 설치가 되어있어야합니다.
-
-```
-예시
-```
-
-### Installing / 설치
-
-아래 사항들로 현 프로젝트에 관한 모듈들을 설치할 수 있습니다.
-
-```
-예시
-```
+* 활용 데이터는 다음과 같이 한정했습니다.
+ - LightGBM Model을 이용한 Wifi Speed, Wifi Success-Rate 예측
+  + 역은 2호선 순환선으로 한정함
+  + 시간은 1시간 단위로 한정함
+  + Score는 Speed와 Success-Rate 간 가중치를 고려한 값 (0 <= Score <= 1)
+* Example
+|Station|Day of the week|Weather|Hour|SSID|Score|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|강남|금|맑음|5|KT-Wifi|0.4601|
+|강남|금|맑음|5|U-Wifi|0.4648|
+|강남|금|맑음|5|T-Wifi|0.4515|
+|강남|금|맑음|5|KT-Free|0.3758|
+|강남|금|맑음|5|Free-U|0.4645|
+...
 
 ## Running the tests / 테스트의 실행
 ### UML
